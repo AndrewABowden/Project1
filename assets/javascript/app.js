@@ -7,7 +7,7 @@ $(document).ready(function () {
     } else {
         var meetupAccessToken = location.href.split("#")[1];
         console.log(meetupAccessToken);
-        var meetupURL = "https://api.meetup.com/2/events?" + meetupAccessToken + "&group_urlname=books";
+        var meetupURL = "https://api.meetup.com/find/groups?" + meetupAccessToken + "&text=tech";
 
         $.ajax({
             url: meetupURL,
