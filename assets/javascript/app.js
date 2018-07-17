@@ -12,6 +12,7 @@ $(document).ready(function () {
     class Event {
         constructor(name, date, link, info, src, id, urlName) {
             this.name = name;
+            // store as moment display using formatgit
             this.date = date;
             this.link = link;
             this.info = info;
@@ -43,7 +44,6 @@ $(document).ready(function () {
             });
         })
     }
-    getEventBriteFavorites(eventBriteIds);
     function getEventBriteFavorites(arrayOfIDs){
         var eBArray=[]
         arrayOfIDs.forEach(function(e){
@@ -73,7 +73,6 @@ $(document).ready(function () {
         }
     }
 
-   // getEventBrite()
     function formatEventBriteData(event) {
         date = moment(event.start.local, "YYYY-MM-DD HH:mm:ss")
         console.log(event.id)
@@ -82,7 +81,7 @@ $(document).ready(function () {
     }
     function isReady() {
         readyCheck++
-        if (true){//readyCheck === 2) {
+        if (readyCheck === 2) {
             sortEvents()
             readyCheck = 0;
         }
@@ -101,6 +100,26 @@ $(document).ready(function () {
             else return 1
         })
         console.log("after sort",events)
+        populateEvents()
+    }
+
+    function populateEvents(){
+        events.forEach(function(e){
+            // creating a div to rule them all
+            var containingDiv = $("<div>")
+            // creating the title of the gathering
+            var title = $("<h2>").text(e.name)
+            // showing the date
+            var date = $("<p>").text(e.date.format("MMMM DD YYYY hh:mm a"))
+            // showing the summary
+            var sum = $("<p>").text(e.info)
+            // giving a link to 
+            var link = $("<a>").text(e.link).attr("href",e.link)
+            // appending it all to the ruler
+            containingDiv.append(title, date, sum, link)
+            // showing it on the screen
+            $("#results-display").append(containingDiv)
+        })
     }
 
     //MEETUP 
@@ -119,8 +138,6 @@ $(document).ready(function () {
             isReady();
         });
     }
-
-    getMeetUp();
 
     //newEvent
     function formatMeetUp(event) {
