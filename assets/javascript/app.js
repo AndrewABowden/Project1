@@ -11,6 +11,7 @@ $(document).ready(function () {
             console.log(this)
         }
     }
+
     var query = "javascript";
     //zipcode seems to work fine
     var zipcode = "85281";
@@ -52,7 +53,6 @@ $(document).ready(function () {
             url: meetupURL,
             method: "GET"
         }).then(function (res) {
-            console.log(res);
             res.forEach(element => {
                 formatMeetUp(element);
             });
@@ -64,7 +64,7 @@ $(document).ready(function () {
     //newEvent
     function formatMeetUp(event) {
         var date = moment(event.next_event.time).format("MMMM DD YYYY hh:mm a");
-        newEvent = new Event(event.name, date, event.link, event.next_event.name)
+        newEvent = new Event(event.name, date, event.link, event.next_event.name);
     }
 
 }); 
