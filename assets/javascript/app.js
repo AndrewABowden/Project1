@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var eventBriteIds = [];
     var events = [];
     // this var is for testing to see if we got both our ajax calls back.
     var readyCheck = 0;
@@ -29,12 +30,12 @@ $(document).ready(function () {
     //EventBrite Query
     function getEventBrite() {
         var eventBriteURL = "https://www.eventbriteapi.com/v3/events/search/?q=" + query + "&location.address=" + zipcode + "&location.within=" + distance + "mi&token=" + token
-        console.log(eventBriteURL)
+        // console.log(eventBriteURL)
         $.ajax({
             url: eventBriteURL,
             method: "GET"
         }).then(function (res) {
-            console.log(res)
+            // console.log(res)
             res.events.forEach(element => {
                 formatEventBriteData(element)
             });
@@ -42,7 +43,6 @@ $(document).ready(function () {
     }
 
     //EventBrite Favorites
-    getEventBriteFavorites(eventBriteIds);
     function getEventBriteFavorites(arrayOfIDs) {
         var eBArray = []
         arrayOfIDs.forEach(function (e) {
@@ -56,7 +56,7 @@ $(document).ready(function () {
             url: URL,
             method: "GET"
         }).then(function (res) {
-            console.log("eventbrite fave", res)
+            // console.log("eventbrite fave", res)
             formatEventBriteData(res)
             checkEventBriteFinished();
         })
@@ -66,7 +66,7 @@ $(document).ready(function () {
         if (eventBriteNum === eventBriteIds.length) {
             eventBriteNum = 0;
             isReady();
-            console.log('sorting');
+            // console.log('sorting');
         }
     }
 
@@ -124,6 +124,7 @@ $(document).ready(function () {
         distance= $("#search-Location").val().trim();
         getEventBrite();
         getMeetUp();
+        console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
     });
 
     function isReady() {
