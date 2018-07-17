@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Latest compiled and minified Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <!-- Moment JS -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <!--Ajax-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <!-- My stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lustria" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <!-- Nav tabs -->
+        <div class="container ">
+            <nav class="nav navbar-dark bg-dark rounded">
+                <div class="nav " role="navigation ">
+                    <ul class="nav nav-tabs " role="tablist ">
+                            <a class="navbar-brand" href="#"></a>
+                            <img src="assets/images/logo_small.png">
+                        </a>
+                        <ul class="navbar-nav mr-auto "></ul>
+                        <li class="nav-link ">
+                            <a href="index.html" aria-controls="index
+                                                                            " role="tab " data-toggle "tab ">Home</a>
+                        </li>
+                        <li class="nav-link ">
+                            <a href="favorites.html" aria-controls="favorites" role="tab
+                                                                            " data-toggle "tab ">Favorites</a>
+                        </li>
+                       
+                        <li class="nav-link ">
+                            <a href="login.html " aria-controls="contact " role="tab
+                                            " data-toggle "tab ">Login</a>
+                        </li>
+                    </ul>
+                </div>
+                </nav>
+            </div>
+        </header>
+   <!--class="input-group"> -->
+<div class="container">
+   <div class="row">
+        <div class="col-12">
+            <div class="search-form rounded">
+                <h3 class="header-small rounded">Register!</h3>
+            </div>
+            <form id="my-form" action="">
+                <div class="form-group">
+                    <label for="user-Email">User Email: </label>
+                    <input type="text" class="form-control" placeholder="Email.." id="user-Email" value="">
+                        <span class="emsg hidden" id="email-Error">Enter a valid email address.</span>
+                
+                </div>
+                <div class="form-group">
+                    <label for="first-Name">First Name: </label>
+                    <input type="text" class="form-control" placeholder="First Name.." id="first-Name" value="">
+                   
+                        <span class="emsg hidden" id="name-Error">.</span>
+                  
+                </div>
+                <div class="form-group">
+                    <label for="last-Name">Last Name: </label>
+                    <input type="text" class="form-control" placeholder="Last Name.." id="last-Name">
+                    
+                        <span class="emsg hidden" id="name-Error"></span>
+                 
+                </div>
+                <div class="form-group">
+                    <label for="password">Password: </label>
+                    <input type="password" class="form-control" placeholder="......." id="user-Password">
+                    
+                        <span class="emsg hidden" id="passwd-Error">6 Digits please!</span>
+                   
+                </div>
+                <div class="form-group">
+                        <label for="password">Zipcode: </label>
+                    <input type="text" class="form-control" placeholder="######" id="user-Zip">
+                   
+                        <span class="emsg hidden" id="zip-Error">Enter a valid 5 digit zipcode.</span>
+                  
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="register">Register</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+        
+      
+</div>
+ <!-- Footer Links -->
+ <footer>
+        <style>
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: black;
+                color: white;
+                text-align: center;
+            }
+        </style>
+
+        <!-- Copyright -->
+        <div class="footer text-center py-3 ">Created by
+            <b>The Romantic Ravens</b>
+        </div>
+
+    </footer>
+
+
+    <!-- jQuery minified -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified Bootstrap JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+        
+    <!-- My JS -->
+    <script src="config.js"></script>
+    <script src="assets/javascript/app.js"></script>
+    <script src="assets/javascript/firebaseinfo.js"></script>
+    <script src="assets/javascript/index-app.js"></script>
+
+    <script src="assets/javascript/registration-app.js"></script>
+</body>
+
+</html>
+
+
