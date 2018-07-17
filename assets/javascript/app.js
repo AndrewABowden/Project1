@@ -30,19 +30,22 @@ $(document).ready(function () {
     // distance in miles
     var distance = 10;
     var token = "OPXO3YNHODUWUYTO6G2N";
+    
     function getEventBrite() {
 
         var eventBriteURL = "https://www.eventbriteapi.com/v3/events/search/?q=" + query + "&location.address=" + zipcode + "&location.within=" + distance + "mi&token=" + token
-        console.log(eventBriteURL)
+        //console.log(eventBriteURL)
         $.ajax({
             url: eventBriteURL,
             method: "GET"
         }).then(function (res) {
-            console.log(res)
+            //console.log(res)
             res.events.forEach(element => {
                 formatEventBriteData(element)
             });
+            isReady()
         })
+
     }
     function getEventBriteFavorites(arrayOfIDs){
         var eBArray=[]
@@ -57,7 +60,7 @@ $(document).ready(function () {
             url:URL,
             method:"GET"
         }).then(function(res){
-            console.log("eventbrite fave", res)
+            //console.logconsole.log("eventbrite fave", res)
             formatEventBriteData(res)
             checkEventBriteFinished();
         })
@@ -69,17 +72,18 @@ $(document).ready(function () {
         {
             eventBriteNum =0;
             isReady();
-            console.log('sorting');
+            //console.log('sorting');
         }
     }
 
     function formatEventBriteData(event) {
         date = moment(event.start.local, "YYYY-MM-DD HH:mm:ss")
-        console.log(event.id)
+        //console.log(event.id)
         e = new Event(event.name.text, date, event.url, event.description.text, "eventBrite", event.id, "");
-        console.log(e);
+        //console.log(e);
     }
     function isReady() {
+        console.log("ready")
         readyCheck++
         if (readyCheck === 2) {
             sortEvents()
@@ -88,7 +92,8 @@ $(document).ready(function () {
     }
     function sortEvents() {
         readyCheck = 0;
-        console.log("before sort",events)
+        //console.log("before sort",events)
+        console.log("sorting")
         events.sort(function (a, b) {
             var adate = a.date
             var bdate = b.date
@@ -99,11 +104,12 @@ $(document).ready(function () {
             }
             else return 1
         })
-        console.log("after sort",events)
+        //console.log("after sort",events)
         populateEvents()
     }
 
     function populateEvents(){
+        console.log("populate called")
         events.forEach(function(e){
             // creating a div to rule them all
             var containingDiv = $("<div>")
