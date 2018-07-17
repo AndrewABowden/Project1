@@ -77,6 +77,7 @@ $(document).ready(function () {
             res.forEach(element => {
                 formatMeetUp(element);
             });
+            isReady();
         });
     }
 
