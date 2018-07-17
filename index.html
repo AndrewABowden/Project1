@@ -8,21 +8,12 @@
     <!-- Latest compiled and minified Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
-
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
     <!-- Moment JS -->
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-    <!--BS Mind-->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous"></script>
     <!--Ajax-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <!--Moment JS -->
-    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-    <!--Jquery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <!-- My stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -38,20 +29,25 @@
             <nav class="nav navbar-dark bg-dark rounded">
                 <div class="nav " role="navigation ">
                     <ul class="nav nav-tabs " role="tablist ">
-                        <a class="navbar-brand " href="# ">Eventer App</a>
+                        
+                        <a class="navbar-brand" href="#"></a>
+                                <img src="assets/images/logo_small.png">
+                            </a>
+                       
                         <ul class="navbar-nav mr-auto "></ul>
                         <li class="nav-link ">
                             <a href="index.html " class="active " aria-controls="index
                                     " role="tab " data-toggle "tab ">Home</a>
                         </li>
                         <li class="nav-link ">
-                            <a href="events.html" aria-controls="events " role="tab
-                                    " data-toggle "tab ">Events</a>
+                            <a href="favorites.html" aria-controls="favorites " role="tab
+                                    " data-toggle "tab ">Favorites</a>
                         </li>
+                      
                         <li class="nav-link ">
-                            <a href="contact.html " aria-controls="contact " role="tab
-                                    " data-toggle "tab ">Contact</a>
-                        </li>
+                                <a href="login.html " aria-controls="contact " role="tab
+                                        " data-toggle "tab ">Login</a>
+                            </li>
                     </ul>
                 </div>
 
@@ -61,7 +57,7 @@
         </div>
     </header>
 
-
+     
     <div class="container">
         <!--d block makes this a block and overrides flex-->
         <div class="row  justify-content-center">
@@ -85,10 +81,10 @@
                     </div>
                     <div class="form-group">
                         <label for="search-number">Zipcode: </label>
-                        <input class="form-control" id="search-Number" type="number" placeholder="#..">
+                        <input class="form-control" id="search-Number" type="number" placeholder="#####">
                     </div>
                     <div class="form-group">
-                        <label for="location">Distance</label>
+                        <label for="location">Distance:</label>
                         <input class="form-control" id="search-Location" type="text" placeholder="Search..">
                     </div>
                     <!-- <div class="form-group">
@@ -108,10 +104,6 @@
 
 
             </div>
-
-
-
-
             <!--Results Form End div-->
         </div>
 
@@ -140,22 +132,18 @@
     </footer>
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous"></script>
-
     <!-- jQuery minified -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <!-- Latest compiled and minified Bootstrap JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
+        
     <!-- My JS -->
     <script src="config.js"></script>
     <script src="assets/javascript/app.js"></script>
-    <link src="app.js">
+    <script src="assets/javascript/firebaseinfo.js"></script>
+    <script src="assets/javascript/index-app.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,35 +29,40 @@
             <nav class="nav navbar-dark bg-dark rounded">
                 <div class="nav " role="navigation ">
                     <ul class="nav nav-tabs " role="tablist ">
-                            <a class="navbar-brand" href="#"></a>
-                            <img src="assets/images/logo_small.png">
-                        </a>
+                        
+                        <a class="navbar-brand" href="#"></a>
+                                <img src="assets/images/logo_small.png">
+                            </a>
+                       
                         <ul class="navbar-nav mr-auto "></ul>
                         <li class="nav-link ">
                             <a href="index.html " aria-controls="index
                                     " role="tab " data-toggle "tab ">Home</a>
                         </li>
                         <li class="nav-link ">
-                            <a href="favorites.html" aria-controls="favorites " role="tab
+                            <a href="favorites.html" class="active " aria-controls="favorites " role="tab
                                     " data-toggle "tab ">Favorites</a>
                         </li>
-                        
+                       
                         <li class="nav-link ">
-                            <a href="login.html " class="active" aria-controls="contact " role="tab
-                                        " data-toggle "tab ">Log in</a>
-                        </li>
+                                <a href="login.html " aria-controls="contact " role="tab
+                                        " data-toggle "tab ">Login</a>
+                            </li>
                     </ul>
                 </div>
+
+
+
             </nav>
         </div>
     </header>
 
-
+     
     <div class="container">
         <!--d block makes this a block and overrides flex-->
         <div class="row  justify-content-center">
             <div class="col-12 header-column">
-                <h1 class="header rounded">Login Page</h1>
+                <h1 class="header rounded">Favorites</h1>
                 <br>
                 <!-- Renders Button layout dump-->
             </div>
@@ -66,34 +70,26 @@
         <div class="row">
             <div class="col-12">
                 <div class="search-form rounded">
-                    <h3 class="header-small rounded">Log in or Register</h3>
+                    <h3 class="header-small rounded">Check your favorites below!</h3>
                 </div>
-                <form id="my-form" action="">
-                    <div class="form-group">
-                        <!--First Name-->
-                        <label for="first-Name">Enter First Name:</label>
-                        <input class="form-control" id="first-Name" type="text" value="" placeholder="First name..">
-                    </div>
-                    <div class="form-group">
-                        <!--First Name-->
-                        <label for="last-Name">Enter Last Name:</label>
-                        <input class="form-control" id="last-Name" type="text" value="" placeholder="Last name..">
-                    </div>
-                    <div class="form-group">
-                        <!--First Name-->
-                        <label for="email">Enter Email:</label>
-                        <input class="form-control" id="user-Email" type="text" value="" placeholder="Email..">
-                    </div>
-
-                    <button id="submit-Search" class="btn-primary rounded" type="submit">Submit</button>
-                    <a id="register" class="btn-primary rounded" href="registration.html">Register</a>
-                </form>
+              
             </div>
         </div>
-<!--Container div end-->
+
+
+        <div class="favorites-Display rounded">
+            <div id="fav-DisplayBox">
+
+
+            </div>
+            <!--Results Form End div-->
+        </div>
+
+
+        <!--Container End-->
     </div>
- <!-- Footer Links -->
- <footer>
+    <!-- Footer Links -->
+    <footer>
         <style>
             .footer {
                 position: fixed;
@@ -113,6 +109,7 @@
 
     </footer>
 
+
     <!-- jQuery minified -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
@@ -125,3 +122,6 @@
     <script src="assets/javascript/app.js"></script>
     <script src="assets/javascript/firebaseinfo.js"></script>
     <script src="assets/javascript/index-app.js"></script>
+</body>
+
+</html>

@@ -5,7 +5,7 @@ body {
 
 /*Nav Menu title */
   .navbar-brand {
-    padding: 10px 14px;
+    padding: 2px;
     font-size: 22px;
     font-family: 'Lustria', serif;
 }
@@ -105,4 +105,21 @@ a active {
 }
 .results-form {
     margin-top: 10px;
+}
+
+
+/* Matt Firebase Login/Registration API Styling */
+.emsg{
+    color: red;
+}
+.hidden {
+     visibility:hidden;
+}
+
+#register {
+    padding: 4px;
+    background-color: red;
+    box-shadow: 1px black;
+    border-width: 2px;
+    border: 1px solid darkred;
 }
