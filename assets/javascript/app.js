@@ -12,6 +12,7 @@ $(document).ready(function () {
     class Event {
         constructor(name, date, link, info, src, id, urlName) {
             this.name = name;
+            // store as moment display using formatgit
             this.date = date;
             this.link = link;
             this.info = info;
@@ -29,21 +30,23 @@ $(document).ready(function () {
     // distance in miles
     var distance = 10;
     var token = "OPXO3YNHODUWUYTO6G2N";
+    
     function getEventBrite() {
 
         var eventBriteURL = "https://www.eventbriteapi.com/v3/events/search/?q=" + query + "&location.address=" + zipcode + "&location.within=" + distance + "mi&token=" + token
-        console.log(eventBriteURL)
+        //console.log(eventBriteURL)
         $.ajax({
             url: eventBriteURL,
             method: "GET"
         }).then(function (res) {
-            console.log(res)
+            //console.log(res)
             res.events.forEach(element => {
                 formatEventBriteData(element)
             });
+            isReady()
         })
+
     }
-    getEventBriteFavorites(eventBriteIds);
     function getEventBriteFavorites(arrayOfIDs){
         var eBArray=[]
         arrayOfIDs.forEach(function(e){
@@ -57,7 +60,7 @@ $(document).ready(function () {
             url:URL,
             method:"GET"
         }).then(function(res){
-            console.log("eventbrite fave", res)
+            //console.logconsole.log("eventbrite fave", res)
             formatEventBriteData(res)
             checkEventBriteFinished();
         })
@@ -69,27 +72,28 @@ $(document).ready(function () {
         {
             eventBriteNum =0;
             isReady();
-            console.log('sorting');
+            //console.log('sorting');
         }
     }
 
-   // getEventBrite()
     function formatEventBriteData(event) {
         date = moment(event.start.local, "YYYY-MM-DD HH:mm:ss")
-        console.log(event.id)
+        //console.log(event.id)
         e = new Event(event.name.text, date, event.url, event.description.text, "eventBrite", event.id, "");
-        console.log(e);
+        //console.log(e);
     }
     function isReady() {
+        console.log("ready")
         readyCheck++
-        if (true){//readyCheck === 2) {
+        if (readyCheck === 2) {
             sortEvents()
             readyCheck = 0;
         }
     }
     function sortEvents() {
         readyCheck = 0;
-        console.log("before sort",events)
+        //console.log("before sort",events)
+        console.log("sorting")
         events.sort(function (a, b) {
             var adate = a.date
             var bdate = b.date
@@ -100,7 +104,28 @@ $(document).ready(function () {
             }
             else return 1
         })
-        console.log("after sort",events)
+        //console.log("after sort",events)
+        populateEvents()
+    }
+
+    function populateEvents(){
+        console.log("populate called")
+        events.forEach(function(e){
+            // creating a div to rule them all
+            var containingDiv = $("<div>")
+            // creating the title of the gathering
+            var title = $("<h2>").text(e.name)
+            // showing the date
+            var date = $("<p>").text(e.date.format("MMMM DD YYYY hh:mm a"))
+            // showing the summary
+            var sum = $("<p>").text(e.info)
+            // giving a link to 
+            var link = $("<a>").text(e.link).attr("href",e.link)
+            // appending it all to the ruler
+            containingDiv.append(title, date, sum, link)
+            // showing it on the screen
+            $("#results-display").append(containingDiv)
+        })
     }
 
     //MEETUP 
@@ -119,8 +144,6 @@ $(document).ready(function () {
             isReady();
         });
     }
-
-    getMeetUp();
 
     //newEvent
     function formatMeetUp(event) {
