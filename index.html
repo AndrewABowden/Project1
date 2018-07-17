@@ -8,18 +8,143 @@
     <!-- Latest compiled and minified Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
-    <!-- My stylesheet -->
-    <link rel="stylesheet" href="assets/css/style.css">
+
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
     <!-- Moment JS -->
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-    <title>Document</title>
+    <!--BS Mind-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <!--Ajax-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <!--Moment JS -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <!--Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- My stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lustria" rel="stylesheet">
+
 </head>
 
 <body>
+    <header>
+        <!-- Nav tabs -->
+        <div class="container ">
+            <nav class="nav navbar-dark bg-dark rounded">
+                <div class="nav " role="navigation ">
+                    <ul class="nav nav-tabs " role="tablist ">
+                        <a class="navbar-brand " href="# ">Eventer App</a>
+                        <ul class="navbar-nav mr-auto "></ul>
+                        <li class="nav-link ">
+                            <a href="index.html " class="active " aria-controls="index
+                                    " role="tab " data-toggle "tab ">Home</a>
+                        </li>
+                        <li class="nav-link ">
+                            <a href="events.html" aria-controls="events " role="tab
+                                    " data-toggle "tab ">Events</a>
+                        </li>
+                        <li class="nav-link ">
+                            <a href="contact.html " aria-controls="contact " role="tab
+                                    " data-toggle "tab ">Contact</a>
+                        </li>
+                    </ul>
+                </div>
 
 
+
+            </nav>
+        </div>
+    </header>
+
+
+    <div class="container">
+        <!--d block makes this a block and overrides flex-->
+        <div class="row  justify-content-center">
+            <div class="col-12 header-column">
+                <h1 class="header rounded">Event Search</h1>
+                <br>
+                <!-- Renders Button layout dump-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="search-form rounded">
+                    <h3 class="header-small rounded">Search Local Events!</h3>
+                </div>
+                <form id="my-form" action="">
+                    <div class="form-group">
+                        <!--Search Term-->
+                        <label for="search-Event">Search Events:</label>
+                        <input class="form-control" id="search-Event" type="text" value="" placeholder="Search..">
+                        <!--# of Records-->
+                    </div>
+                    <div class="form-group">
+                        <label for="search-number">Zipcode: </label>
+                        <input class="form-control" id="search-Number" type="number" placeholder="#..">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Distance</label>
+                        <input class="form-control" id="search-Location" type="text" placeholder="Search..">
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="category">Category:</label>
+                        <input class="form-control" id="search-Category" type="text" placeholder="Search..">
+                    </div> -->
+                    <button id="submit-Search" class="btn-primary rounded" type="submit">Submit</button>
+                    <button id="clear" class="btn-primary rounded" type="submit">Clear</button>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="results-form rounded">
+            <h3 class="header-small rounded">Top Events:</h3>
+            <div id="results-display">
+
+
+            </div>
+
+
+
+
+            <!--Results Form End div-->
+        </div>
+
+
+        <!--Container End-->
+    </div>
+    <!-- Footer Links -->
+    <footer>
+        <style>
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: black;
+                color: white;
+                text-align: center;
+            }
+        </style>
+
+        <!-- Copyright -->
+        <div class="footer text-center py-3 ">Created by
+            <b>The Romantic Ravens</b>
+        </div>
+
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
 
     <!-- jQuery minified -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -30,6 +155,7 @@
     <!-- My JS -->
     <script src="config.js"></script>
     <script src="assets/javascript/app.js"></script>
+    <link src="app.js">
 </body>
 
 </html>

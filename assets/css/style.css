@@ -1,0 +1,108 @@
+body {
+    background-image: url("https://subtlepatterns.com/patterns/contemporary_china.png");
+    font-family: 'Lustria', serif;
+  }
+
+/*Nav Menu title */
+  .navbar-brand {
+    padding: 10px 14px;
+    font-size: 22px;
+    font-family: 'Lustria', serif;
+}
+/*Nav Menu */
+  .nav {
+    width: 100%;
+    background-color: #050320;
+
+
+    border-radius: 1px;
+    box-shadow: 1x 1px 1px 1px black;
+    font-family: 'Lustria', serif;
+}
+.nav a {
+    height: 50px;
+    text-align: center;
+    font-size: 19px;
+    font-family: 'Lustria', serif;
+}
+.nav a hover {
+    color: white;
+}
+.nav-tabs {
+ 
+    height: 50px;
+    font-size: 18px;
+    font-family: 'Lustria', serif;
+
+}
+li active {
+    background-color: #b3b3b3;
+    color: white;
+}
+.active {
+    color: white;
+}
+a hover {
+    color: white;
+}
+a active {
+    color: white;
+}
+
+/* API Content Container */
+/* #apiContainer {
+    border: 2px solid black;
+    border-radius: 4px;
+    box-shadow: 5px 5px 5px rgba(18, 0, 41, 0.5);
+    transition: box-shadow 1s;
+    animation: bounceIn 2s;
+      
+} */
+/* styles add later 
+.crystals  {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.crystal {
+    border: 2px solid black;
+    height: 200px;
+    width: 200px;
+    border-radius: 4px;
+    box-shadow: 5px 5px 5px rgba(18, 0, 41, 0.5);
+    transition: box-shadow 1s;
+    animation: bounceIn 2s;
+      
+}
+.crystal:hover{
+    box-shadow: 15px 15px 15px rgba(0, 0 , 0, 0.5);
+    cursor: pointer;
+    transition: box-shadow 1s;
+}
+*/
+
+
+
+.header {
+    align-content: center;
+    text-align: center;
+    background-color: #070c36;
+    padding: 30px;
+    margin: 0px;
+    margin-top:5px;
+
+    color: white;
+}
+.search-form {
+    border: .5px solid #F5ECE8;
+
+}
+.form-group {
+    padding: 5px;
+}
+.button-holder {
+    padding: 5px;
+}
+.results-form {
+    margin-top: 10px;
+}
