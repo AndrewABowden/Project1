@@ -1,9 +1,9 @@
 $(document).ready(function () {
     // this will be overwritten by our database
     var eventBriteIds = [
-        47355285935,
+        47699816435,
         48115354320,
-        47699816435
+        47355285935
     ]
     var events = [];
     // this var is for testing to see if we got both our ajax calls back.
@@ -43,7 +43,7 @@ $(document).ready(function () {
             });
         })
     }
-    getEventBriteFavorites(idarg);
+    getEventBriteFavorites(eventBriteIds);
     function getEventBriteFavorites(arrayOfIDs){
         var eBArray=[]
         arrayOfIDs.forEach(function(e){
@@ -77,18 +77,19 @@ $(document).ready(function () {
     function formatEventBriteData(event) {
         date = moment(event.start.local, "YYYY-MM-DD HH:mm:ss")
         console.log(event.id)
-        e = new Event(event.name, date, event.url, event.description.text, "eventBrite", event.id, "");
+        e = new Event(event.name.text, date, event.url, event.description.text, "eventBrite", event.id, "");
         console.log(e);
     }
     function isReady() {
         readyCheck++
-        if (readyCheck === 2) {
+        if (true){//readyCheck === 2) {
             sortEvents()
             readyCheck = 0;
         }
     }
     function sortEvents() {
         readyCheck = 0;
+        console.log("before sort",events)
         events.sort(function (a, b) {
             var adate = a.date
             var bdate = b.date
@@ -99,6 +100,7 @@ $(document).ready(function () {
             }
             else return 1
         })
+        console.log("after sort",events)
     }
 
     //MEETUP 
@@ -122,7 +124,7 @@ $(document).ready(function () {
 
     //newEvent
     function formatMeetUp(event) {
-        var date = moment(event.next_event.time).format("MMMM DD YYYY hh:mm a");
+        var date = moment(event.next_event.time)//.format("MMMM DD YYYY hh:mm a");
         newEvent = new Event(event.name, date, event.link, event.next_event.name, );
     }
 
