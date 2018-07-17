@@ -23,9 +23,10 @@ $(document).ready(function () {
     //needs mi or km as suffix for eventbrite only
     var distance = 10;
     var token = "OPXO3YNHODUWUYTO6G2N";
+    
+    //EventBrite Query
     function getEventBrite() {
         // our search term
-
         var eventBriteURL = "https://www.eventbriteapi.com/v3/events/search/?q=" + query + "&location.address=" + zipcode + "&location.within=" + distance + "mi&token=" + token
         console.log(eventBriteURL)
         $.ajax({
@@ -66,7 +67,7 @@ $(document).ready(function () {
         // this is where we would sort the events by date.
     }
 
-    //MEETUP 
+    //MEETUP Query
     var pre = "https://cors-anywhere.herokuapp.com/";
     var meetupKey = "221a475e5932e6c6c497a294d424e30";
     var meetupURL = pre + "api.meetup.com/find/groups?key=" + meetupKey + "&photo-host=public&zip=" + zipcode + "&upcoming_events=true&text=" + query + "&radius=" + distance;
@@ -87,11 +88,15 @@ $(document).ready(function () {
 
     //Meetup - newEvent
     function formatMeetUp(event) {
-        var date = moment(event.next_event.time).format("MMMM DD YYYY hh:mm a");
+        var date = moment(event.next_event.time) /*format date when populated to html*/;
         newEvent = new Event(event.name, date, event.link, event.next_event.name, "meetup", event.next_event.id, event.urlname);
     }
 
     //Meetup favorites 
+    function getMeetupFavorites () {
+
+    } 
+
     function returnMeetupFav(id, urlName) {
         var pre = "https://cors-anywhere.herokuapp.com/";
         var meetupKey = "221a475e5932e6c6c497a294d424e30";
