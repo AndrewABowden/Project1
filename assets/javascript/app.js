@@ -13,13 +13,13 @@ $(document).ready(function () {
             console.log(this)
         }
     }
-    var query = "tech"
+
+    var query = "javascript";
     //zipcode seems to work fine
-    var zipcode = "85302"
-    //needs mi or km as suffix
-    var distance = 5
-
-
+    var zipcode = "85281";
+    //needs mi or km as suffix for eventbrite only
+    var distance = 10;
+    var token = "OPXO3YNHODUWUYTO6G2N";
     function getEventBrite() {
         // our search term
 
@@ -29,7 +29,7 @@ $(document).ready(function () {
             url: eventBriteURL,
             method: "GET"
         }).then(function (res) {
-            console.log(res);
+            // console.log(res);
             res.top_match_events.forEach(element => {
                 formatEventBriteData(element)
             });
@@ -63,4 +63,29 @@ $(document).ready(function () {
         })
     // this is where we would sort the events by date.
     }
+
+    //MEETUP 
+    var pre = "https://cors-anywhere.herokuapp.com/";
+    var meetupKey = "221a475e5932e6c6c497a294d424e30";
+    var meetupURL = pre + "api.meetup.com/find/groups?key=" + meetupKey + "&photo-host=public&zip=" + zipcode + "&upcoming_events=true&text=" + query + "&radius=" + distance;
+    console.log(meetupURL);
+    function getMeetUp() {
+        $.ajax({
+            url: meetupURL,
+            method: "GET"
+        }).then(function (res) {
+            res.forEach(element => {
+                formatMeetUp(element);
+            });
+        });
+    }
+
+    getMeetUp();
+
+    //newEvent
+    function formatMeetUp(event) {
+        var date = moment(event.next_event.time).format("MMMM DD YYYY hh:mm a");
+        newEvent = new Event(event.name, date, event.link, event.next_event.name);
+    }
+
 }); 

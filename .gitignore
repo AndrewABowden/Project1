@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-=======
-
 node_modules/
 .vscode
 .idea/
 .DS_Store
->>>>>>> fd24f397a4e9d75308051621962cb8b10a8c823d
 config.js
