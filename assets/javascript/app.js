@@ -12,7 +12,7 @@ $(document).ready(function () {
     var distance = 10;
     var token = "OPXO3YNHODUWUYTO6G2N";
     var eventBriteNum = 0;
-    var eventMeetupNum = 0;
+    var meetupNum = 0;
 
     class Event {
         constructor(name, date, link, info, src, id, urlName) {
@@ -159,6 +159,7 @@ $(document).ready(function () {
         query = $("#search-Event").val().trim();
         zipcode = $("#search-Number").val().trim();
         distance = $("#search-Location").val().trim();
+        events = [];
         getEventBrite();
         getMeetUp();
         console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
