@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var eventBriteIds = [];
+    var meetupIds = [];
     var events = [];
     // this var is for testing to see if we got both our ajax calls back.
     var readyCheck = 0;
@@ -36,7 +37,7 @@ $(document).ready(function () {
             url: eventBriteURL,
             method: "GET"
         }).then(function (res) {
-            //console.log(res)
+            console.log(res)
             res.events.forEach(element => {
                 formatEventBriteData(element)
             });
@@ -44,6 +45,7 @@ $(document).ready(function () {
         })
 
     }
+
     function getEventBriteFavorites(arrayOfIDs) {
         var eBArray = []
         arrayOfIDs.forEach(function (e) {
@@ -79,10 +81,11 @@ $(document).ready(function () {
     }
 
     function populateEvents() {
-        console.log("populate called")
+        $("#results-display").empty();
+        console.log("populate called");
         events.forEach(function (e) {
             // creating a div to rule them all
-            var containingDiv = $("<div>")
+            var containingDiv = $("<div>").addClass("apielements");
             // creating the title of the gathering
             var title = $("<h2>").text(e.name)
             // showing the date
@@ -108,6 +111,7 @@ $(document).ready(function () {
             url: meetupURL,
             method: "GET"
         }).then(function (res) {
+            console.log(res);
             res.forEach(element => {
                 formatMeetUp(element);
             });
@@ -122,8 +126,11 @@ $(document).ready(function () {
     }
 
     //Meetup favorites 
-    function getMeetupFavorites() {
-
+    function getMeetupFavorites(idArray) {
+            var meetupArray = [];
+            idArray.forEach(function (e) {
+                meetupArray.push(returnMeetupFav(e))
+            })
     }
 
     function returnMeetupFav(id, urlName) {
@@ -135,7 +142,16 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (res) {
             formatMeetUp(res);
+            checkMeetupFinished();
         });
+    }
+
+    function checkMeetupFinished() {
+        meetupNum++
+        if (meetupNum === meetupIds.length) {
+            eventMeetupNum = 0;
+            isReady();
+        }
     }
 
     $("#submit-Search").on("click", function () {
