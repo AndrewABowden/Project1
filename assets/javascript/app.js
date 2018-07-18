@@ -1,91 +1,98 @@
 $(document).ready(function () {
-var currentUser = { userID: "", firstName: "", lastName: "", email: "", userZip: "", ebFavorites: [], muFavorites: [] };
+    var currentUser = { userID: "", firstName: "", lastName: "", email: "", userZip: "", ebFavorites: [], muFavorites: [] };
 
-firebase.auth().onAuthStateChanged(function (user) {
-    window.user = user; // user is undefined if no user signed in
-    if (user) { }
-    else {
-        //Return user to initial index page.
-        window.location.href = "index.html";
-    }
-});
-
-let promiseLoadUser = new Promise(function (resolve, reject) {
-    auth.onAuthStateChanged(function (user) {
-        if (user) {
-            // Get the user's information.
-            currentUser.userID = auth.currentUser.uid;
-            database.ref('/users/' + currentUser.userID).once('value', function (snapshot) {
-                currentUser.firstName = snapshot.val().firstName;
-                currentUser.lastName = snapshot.val().lastName;
-                currentUser.email = snapshot.val().email;
-                currentUser.userZip = snapshot.val().userZip;
-                /* Insert HTML Formatting here for user information. */
-
-                /* end of Insert HTML formatting */
-                loadEBFavorites(currentUser.userID)
-                    .then(function () {
-                        /* Insert HTML formatting for Event Brite Favorites here */
-
-                        /* end of Insert HTML formatting */
-                    })
-                    .catch(function () { console.log("Error getting EB Favorites") });
-                loadMUFavorites(currentUser.userID)
-                    .then(function () {
-                        /* Insert HTML formatting for MeetUp Favorites here */
-
-                        /* end of Insert HTML formatting */
-                    })
-                    .catch(function () { console.log("Error getting MU Favorites") });
-                /***************************************************/
-            }, function (errorObject) {
-                console.log("The read failed: " + errorObject.code);
-                reject("Read Error");
-            });
-
-
-        }
-        // if user is not logged in, send them to the log in page
+    firebase.auth().onAuthStateChanged(function (user) {
+        window.user = user; // user is undefined if no user signed in
+        if (user) { }
         else {
-            reject("User not loaded.");
+            //Return user to initial index page.
             window.location.href = "index.html";
         }
-    })
-})
+    });
 
+    let promiseLoadUser = new Promise(function (resolve, reject) {
+        auth.onAuthStateChanged(function (user) {
+            if (user) {
+                // Get the user's information.
+                currentUser.userID = auth.currentUser.uid;
+                database.ref('/users/' + currentUser.userID).once('value', function (snapshot) {
+                    currentUser.firstName = snapshot.val().firstName;
+                    currentUser.lastName = snapshot.val().lastName;
+                    currentUser.email = snapshot.val().email;
+                    currentUser.userZip = snapshot.val().userZip;
+                    /* Insert HTML Formatting here for user information. */
 
-function loadEBFavorites(uID) {
-    return new Promise(function (resolve, reject) {
-        var ebFavs = [];
-        database.ref("/users/" + uID + "/EBFavs").once("value")
-            .then(function (snap) {
-                snap.forEach(function (childSnapshot) {
-                    var childObject = childSnapshot.val();
-                    ebFavs.push(childObject);
+                    /* end of Insert HTML formatting */
+                    loadEBFavorites(currentUser.userID)
+                        .then(function () {
+                            /* Insert HTML formatting for Event Brite Favorites here */
+                            if (document.URL.contains("favorites")) {
+                                currentUser.ebFavorites.forEach(returnEventBriteFavorite(e))
+                            }
+                            /* end of Insert HTML formatting */
+                        })
+                        .catch(function () { console.log("Error getting EB Favorites") });
+                    loadMUFavorites(currentUser.userID)
+                        .then(function () {
+                            /* Insert HTML formatting for MeetUp Favorites here */
+                            if (document.URL.contains("favorites")) {
+                                currentUser.muFavorites.forEach(function(e){
+                                    returnMeetupFav(e.id, e.URL)
+                                })
+                            }
+                            /* end of Insert HTML formatting */
+                        })
+                        .catch(function () { console.log("Error getting MU Favorites") });
+                    /***************************************************/
+                }, function (errorObject) {
+                    console.log("The read failed: " + errorObject.code);
+                    reject("Read Error");
                 });
-                currentUser.ebFavorites = ebFavs;
-                return resolve();
-            });
-    })
-};
 
-function loadMUFavorites(uID) {
-    return new Promise(function (resolve, reject) {
-        var muFavs = [];
-        database.ref("/users/" + uID + "/MUFavs").once("value")
-            .then(function (snap) {
-                snap.forEach(function (childSnapshot) {
-                    var childKey = childSnapshot.key;
-                    var childVal = childSnapshot.val().eURL;
-                    var muObj = { id: childKey, URL: childVal }
-                    muFavs.push(muObj);
+
+            }
+            // if user is not logged in, send them to the log in page
+            else {
+                reject("User not loaded.");
+                window.location.href = "index.html";
+            }
+        })
+    })
+
+
+    function loadEBFavorites(uID) {
+        return new Promise(function (resolve, reject) {
+            var ebFavs = [];
+            database.ref("/users/" + uID + "/EBFavs").once("value")
+                .then(function (snap) {
+                    console.log(snap.val())
+                    snap.forEach(function (childSnapshot) {
+                        var childObject = childSnapshot.val();
+                        ebFavs.push(childObject);
+                    });
+                    currentUser.ebFavorites = ebFavs;
+                    return resolve();
                 });
-                currentUser.muFavorites = muFavs;
-                return resolve();
-            });
-    })
-};
+        })
+    };
 
+    function loadMUFavorites(uID) {
+        return new Promise(function (resolve, reject) {
+            var muFavs = [];
+            database.ref("/users/" + uID + "/MUFavs").once("value")
+                .then(function (snap) {
+                    console.log(snap.val())
+                    snap.val().forEach(function (childSnapshot) {
+                        var childKey = childSnapshot.key;
+                        var childVal = childSnapshot.val().eURL;
+                        var muObj = { id: childKey, URL: childVal }
+                        muFavs.push(muObj);
+                    });
+                    currentUser.muFavorites = muFavs;
+                    return resolve();
+                });
+        })
+    };
 
     var eventBriteIds = [];
     var events = [];
@@ -132,12 +139,6 @@ function loadMUFavorites(uID) {
         })
 
     }
-    function getEventBriteFavorites(arrayOfIDs) {
-        var eBArray = []
-        arrayOfIDs.forEach(function (e) {
-            eBArray.push(returnEventBriteFavorite(e))
-        })
-    }
 
     function returnEventBriteFavorite(str) {
         var URL = "https://www.eventbriteapi.com/v3/events/" + str + "/?token=" + token
@@ -167,6 +168,7 @@ function loadMUFavorites(uID) {
     }
 
     function populateEvents() {
+        $("#results-display").empty()
         console.log("populate called")
         events.forEach(function (e) {
             // creating a div to rule them all
@@ -179,12 +181,42 @@ function loadMUFavorites(uID) {
             var sum = $("<p>").text(e.info)
             // giving a link to 
             var link = $("<a>").text(e.link).attr("href", e.link)
+            // creating favorite button needs a font awesome icon
+            var favBtn = $("<i>").addClass("fav-btn far fa-heart").attr("data-not-favorite", 'fav-btn far fa-heart').attr("data-favorite", "fav-btn fas fa-heart").attr("data-state", "not").attr("data-src", e.src).attr("data-id", e.id).attr("data-url-name", e.urlName)
             // appending it all to the ruler
-            containingDiv.append(title, date, sum, link)
+            containingDiv.append(title, date, sum, link, favBtn)
             // showing it on the screen
             $("#results-display").append(containingDiv)
         })
     }
+
+    $(document).on("click", ".fav-btn", function () {
+        console.log(".fav-btn clicked")
+        if ($(this).attr("data-state") === "not") {
+            $(this).attr("class", $(this).attr("data-favorite"))
+            $(this).attr("data-state", "faved")
+            if ($(this).attr("data-src") === "eventBrite") {
+                //add to eventBrite faves
+                setEBFav($(this).attr("data-id"))
+            }
+            else if($(this).attr("data-src") === "meetup"){
+                // add to meetup faves
+                setMUFav($(this).attr("data-id"), $(this).attr("data-url-name"))
+            }
+        }
+        else if ($(this).attr("data-state") === "faved") {
+            $(this).attr("class", $(this).attr("data-not-favorite"))
+            $(this).attr("data-state", "not");
+            if ($(this).attr("data-src") === "eventBrite") {
+                //remove from eventBrite faves
+                remEBFav(currentUser, $(this).attr("data-id"))
+            }
+            else if($(this).attr("data-src") === "meetup"){
+                // remove from meetup faves
+                remMUFav(currentUser, $(this).attr("data-id"))
+            }
+        }
+    })
 
     //MEETUP Query
     function getMeetUp() {
@@ -209,10 +241,7 @@ function loadMUFavorites(uID) {
         newEvent = new Event(event.name, date, event.link, event.next_event.name, "meetup", event.next_event.id, event.urlname);
     }
 
-    //Meetup favorites 
-    function getMeetupFavorites() {
-
-    }
+    
 
     function returnMeetupFav(id, urlName) {
         var pre = "https://cors-anywhere.herokuapp.com/";
@@ -228,12 +257,30 @@ function loadMUFavorites(uID) {
 
     $("#submit-Search").on("click", function () {
         event.preventDefault();
-        query = $("#search-Event").val().trim();
-        zipcode = $("#search-Number").val().trim();
-        distance = $("#search-Location").val().trim();
-        getEventBrite();
-        getMeetUp();
-        console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
+        $("#results-display").empty()
+        if (query !== $("#search-Event").val().trim() || zipcode !== $("#search-Number").val().trim() || distance !== $("#search-Location").val().trim()) {
+            query = $("#search-Event").val().trim();
+            if (query.includes("#")) {
+                // here is where we need a function asking people to not use # character
+                return;
+            }
+            zipcode = $("#search-Number").val().trim();
+            if (parseInt(zipcode) === NaN || (parseInt(zipcode) <= 501 && parseInt(zipcode) >= 99950)) {
+                // here is where we need a function for not valid zipcode
+                return;
+                // 
+
+            }
+            distance = $("#search-Location").val().trim();
+            if (parseInt(distance) === NaN) {
+                // here is where we need a function for not a valid distance
+                return;
+            }
+            events = []
+            getEventBrite();
+            getMeetUp();
+            console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
+        }
     });
 
     function isReady() {
@@ -258,10 +305,8 @@ function loadMUFavorites(uID) {
         })
         populateEvents();
     }
-
-
-// Run this at the start of your page.. it grabs the DB info.
-promiseLoadUser.then(function (fromResolve) {
-}).catch(function (fromReject) {
+    // Run this at the start of your page.. it grabs the DB info.
+    promiseLoadUser.then(function (fromResolve) {
+    }).catch(function (fromReject) {
+    });
 });
-}); 
