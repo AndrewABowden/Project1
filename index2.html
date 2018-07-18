@@ -28,19 +28,20 @@
 
 <body>
     <header>
-        <!-- Nav tabs -->
-        <div class="container ">
-            <nav class="nav navbar-dark bg-dark rounded">
-                <div class="nav " role="navigation ">
-                    <ul class="nav nav-tabs " role="tablist ">
+            <div class="container">
+                    <!-- Nav tabs -->
+                    <div class="fixed-top">
+                        <nav class="nav navbar-dark bg-dark rounded">
+                            <div class="nav " role="navigation ">
+                                <ul class="nav nav-tabs " role="tablist ">
+            
+                                    <a class="navbar-brand" href="#"></a>
+                                    <img src="assets/images/image_logo_3.png">
+                                    
                         
-                        <a class="navbar-brand" href="#"></a>
-                                <img src="assets/images/logo_small_2.png">
-                            </a>
-                       
                         <ul class="navbar-nav mr-auto "></ul>
                         <li class="nav-link ">
-                            <a href="index.html " class="active " aria-controls="index
+                            <a href="index2.html " class="active " aria-controls="index
                                     " role="tab " data-toggle "tab ">Home</a>
                         </li>
                         <li class="nav-link ">
@@ -49,30 +50,30 @@
                         </li>
                       
                         <li class="nav-link ">
-                                <a href="login.html " aria-controls="contact " role="tab
-                                        " data-toggle "tab ">Login</a>
+                                <a href="#" aria-controls="contact " role="tab
+                                        " data-toggle "tab ">Log Out</a>
                             </li>
                     </ul>
                 </div>
 
             </nav>
         </div>
+        </div>
     </header>
 
      
     <div class="container">
         <!--d block makes this a block and overrides flex-->
-        <div class="row  justify-content-center">
+        <!-- <div class="row  justify-content-center">
             <div class="col-12 header-column">
                 <h1 class="header rounded">Event Search</h1>
                 <br>
-                <!-- Renders Button layout dump-->
-            </div>
-        </div>
+            
+        </div> -->
         <div class="row">
             <div class="col-12">
                 <div class="search-form rounded">
-                    <h3 class="header-small rounded">Search Local Events!</h3>
+                    <h3 class="header rounded">Search Local Events!</h3>
                 </div>
                 <form id="my-form" action="">
                     <div class="form-group">
@@ -119,23 +120,27 @@
     <!-- Footer Links -->
     <footer>
         <style>
-            .footer {
-                position: fixed;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                background-color: black;
-                color: white;
-                text-align: center;
-            }
-        </style>
+                .footer {
+                    position: fixed;
+                    left: 0;
+                    bottom: 0;
+                    height: 70px;
+                    width: 100%;
+                    padding: 20px;
+                    background-color: black;
+                    color: white;
+                    text-align: center;
+                }
+                </style>
+                
+               
 
-        <!-- Copyright -->
-        <div class="footer text-center py-3 ">Created by
-            <b>The Romantic Ravens</b>
-        </div>
 
-    </footer>
+    <div class="footer">Created by
+        <b>The Romantic Ravens</b>
+    </div> 
+
+</footer>
 
 
     <!-- jQuery minified -->
@@ -148,8 +153,8 @@
     <!-- My JS -->
     <script src="config.js"></script>
     <script src="assets/javascript/app.js"></script>
-    <script src="assets/javascript/firebaseinfo.js"></script>
-    <script src="assets/javascript/index-app.js"></script>
+    <script src="assets/javascript/firebase.js"></script>
+    <script src="assets/javascript/login.js"></script>
 </body>
 
 </html>

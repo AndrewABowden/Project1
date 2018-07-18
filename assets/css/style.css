@@ -1,3 +1,7 @@
+html {
+    height: 100%;
+    box-sizing: border-box;
+  }
 body {
     background-image: url("https://subtlepatterns.com/patterns/contemporary_china.png");
     font-family: 'Lustria', serif;
@@ -13,8 +17,15 @@ body {
     background-color: white;
 
 }
+/*footer*/
+/* .footer {
 
-
+                background-color: black;
+                color: white;
+                text-align: center;
+                margin-top: 20px;
+                padding: 30px;
+} */
 
 /*Nav Menu title */
   .navbar-brand {
@@ -25,32 +36,39 @@ body {
 /*Nav Menu */
   .nav {
     width: 100%;
-    background-color: #050320;
-
+    background-color: #04061f;
+  
+    
 
     border-radius: 1px;
     box-shadow: 1x 1px 1px 1px black;
     font-family: 'Lustria', serif;
 }
 .nav a {
-    height: 50px;
+
     text-align: center;
-    font-size: 19px;
+    font-size: 29px;
     font-family: 'Lustria', serif;
+    padding: 4px 10px 8px 14px;
 }
 .nav a hover {
     color: white;
 }
 .nav-tabs {
  
-    height: 50px;
-    font-size: 18px;
+    height: 70px;
+    font-size: 22px;
     font-family: 'Lustria', serif;
+    box-shadow: 1px 1px 1px 1px white;
 
 }
 li active {
     background-color: #b3b3b3;
     color: white;
+}
+a {
+    color: lightblue;
+
 }
 .active {
     color: white;
@@ -99,8 +117,9 @@ a active {
 .header {
     align-content: center;
     text-align: center;
-    background-color: #070c36;
-    padding: 30px;
+    background-color: #060925;
+    
+    padding: 15px;
     margin: 0px;
     margin-top:5px;
 
@@ -130,9 +149,21 @@ a active {
 }
 
 #register {
-    padding: 4px;
-    background-color: red;
+    padding: 5.5px;
+    background-color: #cc0505;
     box-shadow: 1px black;
     border-width: 2px;
-    border: 1px solid darkred;
+    border: 1px solid black;;
+}
+.col-12 {
+    margin-top: 75px;
+}
+
+
+#log-in {
+    margin: 8px;
+}
+
+#my-form {
+    padding: 6px;
 }
