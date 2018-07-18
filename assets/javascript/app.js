@@ -93,7 +93,7 @@ $(document).ready(function () {
             // giving a link to 
             var link = $("<a>").text(e.link).attr("href", e.link)
             // creating favorite button needs a font awesome icon
-            var favBtn = $("<button>").addClass("fav-btn far fa-heart").attr("data-not-favorite", 'far fa-heart').attr("data-favorite", "fas fa-heart").attr("data-state", "not")
+            var favBtn = $("<i>").addClass("fav-btn far fa-heart").attr("data-not-favorite", 'fav-btn far fa-heart').attr("data-favorite", "fav-btn fas fa-heart").attr("data-state", "not")
             // appending it all to the ruler
             containingDiv.append(title, date, sum, link, favBtn)
             // showing it on the screen
@@ -102,14 +102,15 @@ $(document).ready(function () {
     }
 
     $(document).on("click", ".fav-btn", function () {
-        if (this.attr("data-state") === "not") {
-            this.attr("class", this.attr("data-favorite"))
-            this.attr("data-state", "faved")
+        console.log(".fav-btn clicked")
+        if ($(this).attr("data-state") === "not") {
+            $(this).attr("class", $(this).attr("data-favorite"))
+            $(this).attr("data-state", "faved")
             // then add to favorites
         }
-        else if (this.attr("data-state") === "faved") {
-            this.attr("class", this.attr("data-not-favorite"))
-            this.attr("data-state", "not");
+        else if ($(this).attr("data-state") === "faved") {
+            $(this).attr("class", $(this).attr("data-not-favorite"))
+            $(this).attr("data-state", "not");
             //then remove from favorites
         }
     })
@@ -159,15 +160,19 @@ $(document).ready(function () {
         $("#results-display").empty()
         if (query !== $("#search-Event").val().trim() || zipcode !== $("#search-Number").val().trim() || distance !== $("#search-Location").val().trim()) {
             query = $("#search-Event").val().trim();
+            if(query.includes("#")){
+                // here is where we need a function asking people to not use # character
+                return;
+            }
             zipcode = $("#search-Number").val().trim();
-            if(zipcode.parseInt() === NaN || (zipcode.parseInt() <= 501 && zipcode.parseInt() >= 99950)){
+            if(parseInt(zipcode) === NaN || (parseInt(zipcode) <= 501 && parseInt(zipcode) >= 99950)){
                 // here is where we need a function for not valid zipcode
                 return;
                 // 
             
             }
             distance = $("#search-Location").val().trim();
-            if(distance.parseInt() === NaN){
+            if(parseInt(distance) === NaN){
                 // here is where we need a function for not a valid distance
                 return;
             }
