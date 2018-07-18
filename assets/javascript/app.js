@@ -36,7 +36,6 @@ $(document).ready(function () {
             url: eventBriteURL,
             method: "GET"
         }).then(function (res) {
-            // console.log(res)
             //console.log(res)
             res.events.forEach(element => {
                 formatEventBriteData(element)
@@ -45,9 +44,9 @@ $(document).ready(function () {
         })
 
     }
-    function getEventBriteFavorites(arrayOfIDs){
-        var eBArray=[]
-        arrayOfIDs.forEach(function(e){
+    function getEventBriteFavorites(arrayOfIDs) {
+        var eBArray = []
+        arrayOfIDs.forEach(function (e) {
             eBArray.push(returnEventBriteFavorite(e))
         })
     }
@@ -55,11 +54,11 @@ $(document).ready(function () {
     function returnEventBriteFavorite(str) {
         var URL = "https://www.eventbriteapi.com/v3/events/" + str + "/?token=" + token
         $.ajax({
-            url:URL,
-            method:"GET"
-        }).then(function(res){
+            url: URL,
+            method: "GET"
+        }).then(function (res) {
             //console.logconsole.log("eventbrite fave", res)
-            formatEventBriteData(res)
+            formatEventBriteData(res);
             checkEventBriteFinished();
         })
     }
@@ -78,35 +77,11 @@ $(document).ready(function () {
         e = new Event(event.name.text, date, event.url, event.description.text, "eventBrite", event.id, "");
         //console.log(e);
     }
-    function isReady() {
-        console.log("ready")
-        readyCheck++
-        if (readyCheck === 2) {
-            sortEvents()
-            readyCheck = 0;
-        }
-    }
-    function sortEvents() {
-        readyCheck = 0;
-        //console.log("before sort",events)
-        console.log("sorting")
-        events.sort(function (a, b) {
-            var adate = a.date
-            var bdate = b.date
-            if (adate.isBefore(bdate)) {
-                return -1
-            } else if (adate.isSame(bdate)) {
-                return 0
-            }
-            else return 1
-        })
-        //console.log("after sort",events)
-        populateEvents()
-    }
 
-    function populateEvents(){
+    function populateEvents() {
+        $("#results-display").empty()
         console.log("populate called")
-        events.forEach(function(e){
+        events.forEach(function (e) {
             // creating a div to rule them all
             var containingDiv = $("<div>")
             // creating the title of the gathering
@@ -116,7 +91,7 @@ $(document).ready(function () {
             // showing the summary
             var sum = $("<p>").text(e.info)
             // giving a link to 
-            var link = $("<a>").text(e.link).attr("href",e.link)
+            var link = $("<a>").text(e.link).attr("href", e.link)
             // appending it all to the ruler
             containingDiv.append(title, date, sum, link)
             // showing it on the screen
@@ -141,7 +116,7 @@ $(document).ready(function () {
         });
     }
 
-    //newEvent
+    //Meetup - newEvent
     function formatMeetUp(event) {
         var date = moment(event.next_event.time) /*format date when populated to html*/;
         newEvent = new Event(event.name, date, event.link, event.next_event.name, "meetup", event.next_event.id, event.urlname);
@@ -168,7 +143,7 @@ $(document).ready(function () {
         event.preventDefault();
         query = $("#search-Event").val().trim();
         zipcode = $("#search-Number").val().trim();
-        distance= $("#search-Location").val().trim();
+        distance = $("#search-Location").val().trim();
         getEventBrite();
         getMeetUp();
         console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
@@ -194,6 +169,6 @@ $(document).ready(function () {
             }
             else return 1
         })
-        // this is where we would sort the events by date.
+        populateEvents();
     }
 }); 
