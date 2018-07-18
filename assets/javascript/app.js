@@ -26,7 +26,7 @@ $(document).ready(function () {
                     loadEBFavorites(currentUser.userID)
                         .then(function () {
                             /* Insert HTML formatting for Event Brite Favorites here */
-                            if(document.URL.contains("favorites")){
+                            if (document.URL.contains("favorites")) {
                                 current.ebFavorites.forEach(returnEventBriteFavorite(e));
                             }
                             /* end of Insert HTML formatting */
@@ -35,7 +35,7 @@ $(document).ready(function () {
                     loadMUFavorites(currentUser.userID)
                         .then(function () {
                             /* Insert HTML formatting for MeetUp Favorites here */
-                            if(document.URL.contains("favorites")){
+                            if (document.URL.contains("favorites")) {
                             }
                             /* end of Insert HTML formatting */
                         })
@@ -250,6 +250,7 @@ $(document).ready(function () {
         zipcode = $("#search-Number").val().trim();
         distance = $("#search-Location").val().trim();
         events = [];
+        noResults();
         getEventBrite();
         getMeetUp();
         console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
@@ -276,6 +277,13 @@ $(document).ready(function () {
             else return 1
         })
         populateEvents();
+    }
+
+    function noResults() {
+        if (events.length < 1) {
+            var containingDiv = $("<div>").addClass("api-Elements");
+            var noResults = $("span").text("There are no results that meet your search parameters. Try increaseing your search distance.")
+        } 
     }
 
     // Run this at the start of your page.. it grabs the DB info.
