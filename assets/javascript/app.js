@@ -36,7 +36,6 @@ $(document).ready(function () {
                         .then(function () {
                             /* Insert HTML formatting for MeetUp Favorites here */
                             if(document.URL.contains("favorites")){
-                                current.muFavorites.forEach(function(e))
                             }
                             /* end of Insert HTML formatting */
                         })
