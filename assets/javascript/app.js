@@ -290,6 +290,7 @@ $(document).ready(function () {
             getEventBrite();
             getMeetUp();
             console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
+            noResults();
         }
     });
 
@@ -317,7 +318,7 @@ $(document).ready(function () {
     }
 
     function noResults() {
-        if (events.length < 1) {
+        if (events.length === 0) {
             var containingDiv = $("<div>").addClass("api-Elements");
             var noResults = $("span").text("There are no results that meet your search parameters. Try increaseing your search distance.")
         } 
