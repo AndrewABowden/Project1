@@ -36,7 +36,8 @@ body {
 /*Nav Menu */
   .nav {
     width: 100%;
-    background-color: #171625;
+    background-color: #13163a;
+  
     
 
     border-radius: 1px;
@@ -64,6 +65,10 @@ body {
 li active {
     background-color: #b3b3b3;
     color: white;
+}
+a {
+    color: lightblue;
+
 }
 .active {
     color: white;
@@ -112,7 +117,7 @@ a active {
 .header {
     align-content: center;
     text-align: center;
-    background-color: #05071d;
+    background-color: #060925;
     
     padding: 15px;
     margin: 0px;
@@ -144,7 +149,7 @@ a active {
 }
 
 #register {
-    padding: 4px;
+    padding: 5.5px;
     background-color: #cc0505;
     box-shadow: 1px black;
     border-width: 2px;
@@ -154,6 +159,11 @@ a active {
     margin-top: 75px;
 }
 
-.about-Me {
-    background-color: whitesmoke;
+
+#log-in {
+    margin: 8px;
+}
+
+#my-form {
+    padding: 6px;
 }
