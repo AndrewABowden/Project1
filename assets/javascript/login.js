@@ -1,6 +1,5 @@
 $("#log-in").on("click", function () {
-    const promise = auth.signInWithEmailAndPassword($("#user-Email").val(), $("#user-Password").val());
-    promise
+    const promise = auth.signInWithEmailAndPassword($("#user-Email").val(), $("#user-Password").val())
         .then(user => {
             window.location.href = "index2.html";
         })
@@ -12,6 +11,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 function loginError(error) {
+    console.log(error);
     if (error == "auth/user-not-found") {
         alert("You do not have an account, please register.");
     }
