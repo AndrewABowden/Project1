@@ -113,6 +113,7 @@ a active {
     align-content: center;
     text-align: center;
     background-color: #05071d;
+    
     padding: 15px;
     margin: 0px;
     margin-top:5px;
@@ -151,4 +152,8 @@ a active {
 }
 .col-12 {
     margin-top: 75px;
+}
+
+.row { 
+    padding-top: 0px !important;
 }
