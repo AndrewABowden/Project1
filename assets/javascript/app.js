@@ -85,7 +85,7 @@ $(document).ready(function () {
         console.log("populate called");
         events.forEach(function (e) {
             // creating a div to rule them all
-            var containingDiv = $("<div>").addClass("apielements");
+            var containingDiv = $("<div>").addClass("api-Elements");
             // creating the title of the gathering
             var title = $("<h2>").text(e.name)
             // showing the date
