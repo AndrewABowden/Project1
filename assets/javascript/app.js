@@ -26,19 +26,30 @@ $(document).ready(function () {
                     loadEBFavorites(currentUser.userID)
                         .then(function () {
                             /* Insert HTML formatting for Event Brite Favorites here */
-                            if (document.URL.contains("favorites")) {
-                                currentUser.ebFavorites.forEach(returnEventBriteFavorite(e))
+                            if (document.URL.includes("favorites")) {
+                                if (currentUser.ebFavorites.length > 0) {
+                                    currentUser.ebFavorites.forEach(function (e) { returnEventBriteFavorite(e) })
+                                }
+                                else {
+                                    console.log("no ebfavorites")
+                                    isReady()
+                                }
                             }
                             /* end of Insert HTML formatting */
                         })
-                        .catch(function () { console.log("Error getting EB Favorites") });
+                    //.catch(function () { console.log("Error getting EB Favorites") });
                     loadMUFavorites(currentUser.userID)
                         .then(function () {
                             /* Insert HTML formatting for MeetUp Favorites here */
-                            if (document.URL.contains("favorites")) {
-                                currentUser.muFavorites.forEach(function(e){
-                                    returnMeetupFav(e.id, e.URL)
-                                })
+                            if (document.URL.includes("favorites") > 0) {
+                                if (currentUser.muFavorites.length) {
+                                    currentUser.muFavorites.forEach(function (e) {
+                                        returnMeetupFav(e.id, e.URL)
+                                    })
+                                } else {
+                                    console.log("no muFavorites")
+                                    isReady();
+                                }
                             }
                             /* end of Insert HTML formatting */
                         })
@@ -48,8 +59,6 @@ $(document).ready(function () {
                     console.log("The read failed: " + errorObject.code);
                     reject("Read Error");
                 });
-
-
             }
             // if user is not logged in, send them to the log in page
             else {
@@ -65,11 +74,13 @@ $(document).ready(function () {
             var ebFavs = [];
             database.ref("/users/" + uID + "/EBFavs").once("value")
                 .then(function (snap) {
-                    console.log(snap.val())
-                    snap.forEach(function (childSnapshot) {
-                        var childObject = childSnapshot.val();
-                        ebFavs.push(childObject);
-                    });
+                    var some = snap.val()
+                    if (some !== null) {
+                        Object.values(some).forEach(function (childSnapshot) {
+                            var childObject = childSnapshot;
+                            ebFavs.push(childObject);
+                        });
+                    }
                     currentUser.ebFavorites = ebFavs;
                     return resolve();
                 });
@@ -81,14 +92,19 @@ $(document).ready(function () {
             var muFavs = [];
             database.ref("/users/" + uID + "/MUFavs").once("value")
                 .then(function (snap) {
-                    console.log(snap.val())
-                    snap.val().forEach(function (childSnapshot) {
-                        var childKey = childSnapshot.key;
-                        var childVal = childSnapshot.val().eURL;
-                        var muObj = { id: childKey, URL: childVal }
-                        muFavs.push(muObj);
-                    });
+                    var some = snap.val()
+                    console.log(Object.values(some))
+                    if (some !== null) {
+                        Object.values(some).forEach(function (childSnapshot, i) {
+                            var childKey = childSnapshot.eID;
+                            var childVal = childSnapshot.eURL;
+                            var muObj = { id: childKey, URL: childVal }
+                            muFavs.push(muObj);
+                            console.log(muFavs[i])
+                        });
+                    }
                     currentUser.muFavorites = muFavs;
+                    console.log(currentUser.muFavorites)
                     return resolve();
                 });
         })
@@ -154,7 +170,7 @@ $(document).ready(function () {
     }
     function checkEventBriteFinished() {
         eventBriteNum++
-        if (eventBriteNum === eventBriteIds.length) {
+        if (eventBriteNum === currentUser.ebFavorites.length) {
             eventBriteNum = 0;
             isReady();
             //console.log('sorting');
@@ -169,8 +185,9 @@ $(document).ready(function () {
     }
 
     function populateEvents() {
-        $("#results-display").empty();
-        console.log("populate called");
+        $("#results-display").empty()
+        console.log(events)
+        console.log("populate called")
         events.forEach(function (e) {
             // creating a div to rule them all
             var containingDiv = $("<div>").addClass("api-Elements");
@@ -198,9 +215,9 @@ $(document).ready(function () {
             $(this).attr("data-state", "faved")
             if ($(this).attr("data-src") === "eventBrite") {
                 //add to eventBrite faves
-                setEBFav($(this).attr("data-id"))
+                setEBFav(currentUser.userID, $(this).attr("data-id"))
             }
-            else if($(this).attr("data-src") === "meetup"){
+            else if ($(this).attr("data-src") === "meetup") {
                 // add to meetup faves
                 setMUFav($(this).attr("data-id"), $(this).attr("data-url-name"))
             }
@@ -212,7 +229,7 @@ $(document).ready(function () {
                 //remove from eventBrite faves
                 remEBFav(currentUser, $(this).attr("data-id"))
             }
-            else if($(this).attr("data-src") === "meetup"){
+            else if ($(this).attr("data-src") === "meetup") {
                 // remove from meetup faves
                 remMUFav(currentUser, $(this).attr("data-id"))
             }
@@ -242,25 +259,34 @@ $(document).ready(function () {
         var date = moment(event.next_event.time) /*format date when populated to html*/;
         newEvent = new Event(event.name, date, event.link, event.next_event.name, "meetup", event.next_event.id, event.urlname);
     }
+    function formatMeetUpFavorite(event) {
+        var date = moment(event.time) /*format date when populated to html*/;
+        console.log(event);
+        console.log(event.name)
+        newEvent = new Event(event.name, date, event.link, event.name, "meetup", event.id, event.urlname);
+        console.log("successful formatMeetupFavorite")
+    }
 
-    
+
     function returnMeetupFav(id, urlName) {
         var pre = "https://cors-anywhere.herokuapp.com/";
         var meetupKey = "221a475e5932e6c6c497a294d424e30";
         var meetupURL = pre + "api.meetup.com/" + urlName + "/events/" + id + "?key=" + meetupKey + "&photo-host=public";
+        console.log(meetupURL);
         $.ajax({
             url: meetupURL,
             method: "GET"
         }).then(function (res) {
-            formatMeetUp(res);
-            checkMeetupFinished();
+            console.log(res);
+            formatMeetUpFavorite(res);
+            checkMeetUpFinished()
         });
     }
 
-    function checkMeetupFinished() {
+    function checkMeetUpFinished() {
         meetupNum++
-        if (meetupNum === meetupIds.length) {
-            meetupNum = 0;
+        if (meetupNum === currentUser.muFavorites.length) {
+            MeetupNum = 0;
             isReady();
         }
     }
