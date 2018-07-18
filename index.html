@@ -28,49 +28,49 @@
 </head>
 
 <body>
-    <header>
+<header>
+    <div class="container">
         <!-- Nav tabs -->
-        <div class="container ">
+        <div class="fixed-top">
             <nav class="nav navbar-dark bg-dark rounded">
                 <div class="nav " role="navigation ">
                     <ul class="nav nav-tabs " role="tablist ">
-                            <a class="navbar-brand" href="#"></a>
-                            <img src="assets/images/logo_small.png">
-                        </a>
+
+                        <a class="navbar-brand" href="#"></a>
+                        <img src="assets/images/image_logo_3.png">
+                        
+
                         <ul class="navbar-nav mr-auto "></ul>
                         <li class="nav-link ">
-                            <a href="index.html " aria-controls="index
+                            <a href="index2.html " aria-controls="index
                                     " role="tab " data-toggle "tab ">Home</a>
                         </li>
                         <li class="nav-link ">
                             <a href="favorites.html" aria-controls="favorites " role="tab
                                     " data-toggle "tab ">Favorites</a>
                         </li>
-                        
+
                         <li class="nav-link ">
-                            <a href="login.html " class="active" aria-controls="contact " role="tab
-                                        " data-toggle "tab ">Log in</a>
+                            <a href="#" aria-controls="contact " role="tab
+                                        " data-toggle "tab ">Log In</a>
                         </li>
                     </ul>
                 </div>
             </nav>
         </div>
+    </div>
+</div>
     </header>
 
 
     <div class="container">
         <!--d block makes this a block and overrides flex-->
-        <div class="row  justify-content-center">
-            <div class="col-12 header-column">
-                <h1 class="header rounded">Log in Page</h1>
-                <br>
-                <!-- Renders Button layout dump-->
-            </div>
-        </div>
+     
+            
         <div class="row">
             <div class="col-12">
                 <div class="search-form rounded">
-                    <h3 class="header-small rounded">Log in or Register</h3>
+                    <h3 class="header rounded">Log in or Register</h3>
                 </div>
                     <div> 
                         <!--Email-->
@@ -89,24 +89,29 @@
         </div>
 <!--Container div end-->
     </div>
- <!-- Footer Links -->
- <footer>
-        <style>
-            .footer {
-                position: fixed;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                background-color: black;
-                color: white;
-                text-align: center;
-            }
-        </style>
+    <!-- Footer Links -->
+    <footer>
+        
+            <style>
+                    .footer {
+                        position: fixed;
+                        left: 0;
+                        bottom: 0;
+                        height: 70px;
+                        width: 100%;
+                        padding: 20px;
+                        background-color: black;
+                        color: white;
+                        text-align: center;
+                    }
+                    </style>
+                    
+                   
 
-        <!-- Copyright -->
-        <div class="footer text-center py-3 ">Created by
+
+        <div class="footer">Created by
             <b>The Romantic Ravens</b>
-        </div>
+        </div> 
 
     </footer>
 
@@ -118,8 +123,8 @@
         crossorigin="anonymous"></script>
         
     <!-- My JS -->
- 
-    <script src="assets/javascript/firebase.js"></script>
-    <script src="assets/javascript/login.js"></script>
+
+ <script src="assets/javascript/firebase.js"></script>
+ <script src="assets/javascript/login.js"></script>
 </body>
 </html>
