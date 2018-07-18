@@ -25,53 +25,64 @@
 </head>
 
 <body>
-    <header>
+<header>
+    <div class="container">
         <!-- Nav tabs -->
-        <div class="container ">
+        <div class="fixed-top">
             <nav class="nav navbar-dark bg-dark rounded">
                 <div class="nav " role="navigation ">
                     <ul class="nav nav-tabs " role="tablist ">
+<<<<<<< HEAD
                             <a class="navbar-brand" href="#"></a>
                             <img src="assets/images/logo_small.png">
+=======
+
+                        <a class="navbar-brand" href="#"></a>
+                        <img src="assets/images/image_logo_3.png">
+                        
+
+>>>>>>> 72838b37fbc5fca1d6b557ce8d9000befabdfcbc
                         <ul class="navbar-nav mr-auto "></ul>
                         <li class="nav-link ">
-                            <a href="index.html " aria-controls="index
+                            <a href="index2.html " aria-controls="index
                                     " role="tab " data-toggle "tab ">Home</a>
                         </li>
                         <li class="nav-link ">
                             <a href="favorites.html" aria-controls="favorites " role="tab
                                     " data-toggle "tab ">Favorites</a>
                         </li>
-                        
+
                         <li class="nav-link ">
-                            <a href="login.html " class="active" aria-controls="contact " role="tab
-                                        " data-toggle "tab ">Log in</a>
+                            <a href="#" aria-controls="contact " role="tab
+                                        " data-toggle "tab ">Log In</a>
                         </li>
                     </ul>
                 </div>
             </nav>
         </div>
+    </div>
+</div>
     </header>
 
 
     <div class="container">
         <!--d block makes this a block and overrides flex-->
-        <div class="row  justify-content-center">
-            <div class="col-12 header-column">
-                <h1 class="header rounded">Log in Page</h1>
-                <br>
-                <!-- Renders Button layout dump-->
-            </div>
-        </div>
+     
+            
         <div class="row">
             <div class="col-12">
                 <div class="search-form rounded">
-                    <h3 class="header-small rounded">Log in or Register</h3>
+                    <h3 class="header rounded">Log in or Register</h3>
                 </div>
+<<<<<<< HEAD
                 <form id="my-form" action="">
                     
                     <div class="form-group">
                         <!--First Name-->
+=======
+                    <div> 
+                        <!--Email-->
+>>>>>>> 72838b37fbc5fca1d6b557ce8d9000befabdfcbc
                         <label for="email">Enter Email:</label>
                         <input class="form-control" id="user-Email" type="text" value="" placeholder="Email..">
                     </div>
@@ -81,31 +92,41 @@
                             <input class="form-control" id="user-Password" type="text" value="" placeholder="Password..">
                         </div>
 
+<<<<<<< HEAD
                     <button id="submit-Search" class="btn-primary rounded" type="submit">Submit</button>
                     <a id="register" class="btn-primary rounded" href="registration.html">Register</a>
                 </form>
+=======
+                    <button id="log-in" class="btn btn-primary rounded">Log In</button>
+                    <a id="register" class="btn btn-danger rounded" href="registration.html">Register</a>
+>>>>>>> 72838b37fbc5fca1d6b557ce8d9000befabdfcbc
             </div>
         </div>
 <!--Container div end-->
     </div>
- <!-- Footer Links -->
- <footer>
-        <style>
-            .footer {
-                position: fixed;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                background-color: black;
-                color: white;
-                text-align: center;
-            }
-        </style>
+    <!-- Footer Links -->
+    <footer>
+        
+            <style>
+                    .footer {
+                        position: fixed;
+                        left: 0;
+                        bottom: 0;
+                        height: 70px;
+                        width: 100%;
+                        padding: 20px;
+                        background-color: black;
+                        color: white;
+                        text-align: center;
+                    }
+                    </style>
+                    
+                   
 
-        <!-- Copyright -->
-        <div class="footer text-center py-3 ">Created by
+
+        <div class="footer">Created by
             <b>The Romantic Ravens</b>
-        </div>
+        </div> 
 
     </footer>
 
@@ -117,7 +138,8 @@
         crossorigin="anonymous"></script>
         
     <!-- My JS -->
-    <script src="config.js"></script>
-    <script src="assets/javascript/app.js"></script>
-    <script src="assets/javascript/firebaseinfo.js"></script>
-    <script src="assets/javascript/index-app.js"></script>
+
+ <script src="assets/javascript/firebase.js"></script>
+ <script src="assets/javascript/login.js"></script>
+</body>
+</html>
