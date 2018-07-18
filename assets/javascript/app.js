@@ -260,7 +260,7 @@ $(document).ready(function () {
     function checkMeetupFinished() {
         meetupNum++
         if (meetupNum === meetupIds.length) {
-            eventMeetupNum = 0;
+            meetupNum = 0;
             isReady();
         }
     }
@@ -290,7 +290,6 @@ $(document).ready(function () {
             getEventBrite();
             getMeetUp();
             console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
-            noResults();
         }
     });
 
@@ -317,12 +316,14 @@ $(document).ready(function () {
         populateEvents();
     }
 
-    function noResults() {
-        if (events.length === 0) {
-            var containingDiv = $("<div>").addClass("api-Elements");
-            var noResults = $("span").text("There are no results that meet your search parameters. Try increaseing your search distance.")
-        } 
-    }
+    // function noResults() {
+    //     if (events.length === 0) {
+    //         var containingDiv = $("<div>").addClass("api-Elements");
+    //         var noResultsSpan = $("span").text("There are no results that meet your search parameters. Try increaseing your search distance.");
+    //         $(containingDiv).append(noResultsSpan);
+    //         $("#results-display").append(containingDiv);
+    //     } 
+    // }
 
     // Run this at the start of your page.. it grabs the DB info.
     promiseLoadUser.then(function (fromResolve) {
