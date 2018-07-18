@@ -65,6 +65,7 @@ $(document).ready(function () {
             var ebFavs = [];
             database.ref("/users/" + uID + "/EBFavs").once("value")
                 .then(function (snap) {
+                    console.log(snap.val())
                     snap.forEach(function (childSnapshot) {
                         var childObject = childSnapshot.val();
                         ebFavs.push(childObject);
@@ -80,7 +81,8 @@ $(document).ready(function () {
             var muFavs = [];
             database.ref("/users/" + uID + "/MUFavs").once("value")
                 .then(function (snap) {
-                    snap.forEach(function (childSnapshot) {
+                    console.log(snap.val())
+                    snap.val().forEach(function (childSnapshot) {
                         var childKey = childSnapshot.key;
                         var childVal = childSnapshot.val().eURL;
                         var muObj = { id: childKey, URL: childVal }
