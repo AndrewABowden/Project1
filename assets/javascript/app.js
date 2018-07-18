@@ -163,6 +163,8 @@ $(document).ready(function () {
             if(zipcode.parseInt() === NaN || (zipcode.parseInt() <= 501 && zipcode.parseInt() >= 99950)){
                 // here is where we need a function for not valid zipcode
                 return;
+                // 
+            
             }
             distance = $("#search-Location").val().trim();
             if(distance.parseInt() === NaN){
