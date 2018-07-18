@@ -83,7 +83,7 @@ $(document).ready(function () {
         console.log("populate called")
         events.forEach(function (e) {
             // creating a div to rule them all
-            var containingDiv = $("<div>")
+            var containingDiv = $("<div>").addClass("apielements")
             // creating the title of the gathering
             var title = $("<h2>").text(e.name)
             // showing the date
@@ -92,12 +92,27 @@ $(document).ready(function () {
             var sum = $("<p>").text(e.info)
             // giving a link to 
             var link = $("<a>").text(e.link).attr("href", e.link)
+            // creating favorite button needs a font awesome icon
+            var favBtn = $("<button>").addClass("fav-btn far fa-heart").attr("data-not-favorite", 'far fa-heart').attr("data-favorite", "fas fa-heart").attr("data-state", "not")
             // appending it all to the ruler
-            containingDiv.append(title, date, sum, link)
+            containingDiv.append(title, date, sum, link, favBtn)
             // showing it on the screen
             $("#results-display").append(containingDiv)
         })
     }
+
+    $(document).on("click", ".fav-btn", function () {
+        if (this.attr("data-state") === "not") {
+            this.attr("class", this.attr("data-favorite"))
+            this.attr("data-state", "faved")
+            // then add to favorites
+        }
+        else if (this.attr("data-state") === "faved") {
+            this.attr("class", this.attr("data-not-favorite"))
+            this.attr("data-state", "not");
+            //then remove from favorites
+        }
+    })
 
     //MEETUP Query
     function getMeetUp() {
@@ -141,12 +156,24 @@ $(document).ready(function () {
 
     $("#submit-Search").on("click", function () {
         event.preventDefault();
-        query = $("#search-Event").val().trim();
-        zipcode = $("#search-Number").val().trim();
-        distance = $("#search-Location").val().trim();
-        getEventBrite();
-        getMeetUp();
-        console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
+        $("#results-display").empty()
+        if (query !== $("#search-Event").val().trim() || zipcode !== $("#search-Number").val().trim() || distance !== $("#search-Location").val().trim()) {
+            query = $("#search-Event").val().trim();
+            zipcode = $("#search-Number").val().trim();
+            if(zipcode.parseInt() === NaN || (zipcode.parseInt() <= 501 && zipcode.parseInt() >= 99950)){
+                // here is where we need a function for not valid zipcode
+                return;
+            }
+            distance = $("#search-Location").val().trim();
+            if(distance.parseInt() === NaN){
+                // here is where we need a function for not a valid distance
+                return;
+            }
+            events = []
+            getEventBrite();
+            getMeetUp();
+            console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
+        }
     });
 
     function isReady() {
