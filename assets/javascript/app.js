@@ -230,7 +230,7 @@ $(document).ready(function () {
             }
             else if ($(this).attr("data-src") === "meetup") {
                 // add to meetup faves
-                setMUFav($(this).attr("data-id"), $(this).attr("data-url-name"))
+                setMUFav(currentUser.userID,$(this).attr("data-id"), $(this).attr("data-url-name"))
             }
         }
         else if ($(this).attr("data-state") === "faved") {
