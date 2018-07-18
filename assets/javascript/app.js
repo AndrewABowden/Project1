@@ -1,3 +1,4 @@
+$(document).ready(function () {
 var currentUser = { userID: "", firstName: "", lastName: "", email: "", userZip: "", ebFavorites: [], muFavorites: [] };
 
 firebase.auth().onAuthStateChanged(function (user) {
@@ -85,7 +86,7 @@ function loadMUFavorites(uID) {
     })
 };
 
-$(document).ready(function () {
+
     var eventBriteIds = [];
     var events = [];
     // this var is for testing to see if we got both our ajax calls back.
@@ -169,7 +170,7 @@ $(document).ready(function () {
         console.log("populate called")
         events.forEach(function (e) {
             // creating a div to rule them all
-            var containingDiv = $("<div>")
+            var containingDiv = $("<div>").addClass("api-Elements");
             // creating the title of the gathering
             var title = $("<h2>").text(e.name)
             // showing the date
@@ -257,9 +258,10 @@ $(document).ready(function () {
         })
         populateEvents();
     }
-}); 
+
 
 // Run this at the start of your page.. it grabs the DB info.
 promiseLoadUser.then(function (fromResolve) {
 }).catch(function (fromReject) {
 });
+}); 
