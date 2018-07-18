@@ -27,7 +27,7 @@ $(document).ready(function () {
                         .then(function () {
                             /* Insert HTML formatting for Event Brite Favorites here */
                             if (document.URL.contains("favorites")) {
-                                current.ebFavorites.forEach(returnEventBriteFavorite(e));
+                                currentUser.ebFavorites.forEach(returnEventBriteFavorite(e))
                             }
                             /* end of Insert HTML formatting */
                         })
@@ -36,6 +36,9 @@ $(document).ready(function () {
                         .then(function () {
                             /* Insert HTML formatting for MeetUp Favorites here */
                             if (document.URL.contains("favorites")) {
+                                currentUser.muFavorites.forEach(function(e){
+                                    returnMeetupFav(e.id, e.URL)
+                                })
                             }
                             /* end of Insert HTML formatting */
                         })
@@ -62,6 +65,7 @@ $(document).ready(function () {
             var ebFavs = [];
             database.ref("/users/" + uID + "/EBFavs").once("value")
                 .then(function (snap) {
+                    console.log(snap.val())
                     snap.forEach(function (childSnapshot) {
                         var childObject = childSnapshot.val();
                         ebFavs.push(childObject);
@@ -77,7 +81,8 @@ $(document).ready(function () {
             var muFavs = [];
             database.ref("/users/" + uID + "/MUFavs").once("value")
                 .then(function (snap) {
-                    snap.forEach(function (childSnapshot) {
+                    console.log(snap.val())
+                    snap.val().forEach(function (childSnapshot) {
                         var childKey = childSnapshot.key;
                         var childVal = childSnapshot.val().eURL;
                         var muObj = { id: childKey, URL: childVal }
@@ -136,13 +141,6 @@ $(document).ready(function () {
 
     }
 
-    function getEventBriteFavorites(arrayOfIDs) {
-        var eBArray = []
-        arrayOfIDs.forEach(function (e) {
-            eBArray.push(returnEventBriteFavorite(e))
-        })
-    }
-
     function returnEventBriteFavorite(str) {
         var URL = "https://www.eventbriteapi.com/v3/events/" + str + "/?token=" + token
         $.ajax({
@@ -184,12 +182,42 @@ $(document).ready(function () {
             var sum = $("<p>").text(e.info)
             // giving a link to 
             var link = $("<a>").text(e.link).attr("href", e.link)
+            // creating favorite button needs a font awesome icon
+            var favBtn = $("<i>").addClass("fav-btn far fa-heart").attr("data-not-favorite", 'fav-btn far fa-heart').attr("data-favorite", "fav-btn fas fa-heart").attr("data-state", "not").attr("data-src", e.src).attr("data-id", e.id).attr("data-url-name", e.urlName)
             // appending it all to the ruler
-            containingDiv.append(title, date, sum, link)
+            containingDiv.append(title, date, sum, link, favBtn)
             // showing it on the screen
             $("#results-display").append(containingDiv)
         })
     }
+
+    $(document).on("click", ".fav-btn", function () {
+        console.log(".fav-btn clicked")
+        if ($(this).attr("data-state") === "not") {
+            $(this).attr("class", $(this).attr("data-favorite"))
+            $(this).attr("data-state", "faved")
+            if ($(this).attr("data-src") === "eventBrite") {
+                //add to eventBrite faves
+                setEBFav($(this).attr("data-id"))
+            }
+            else if($(this).attr("data-src") === "meetup"){
+                // add to meetup faves
+                setMUFav($(this).attr("data-id"), $(this).attr("data-url-name"))
+            }
+        }
+        else if ($(this).attr("data-state") === "faved") {
+            $(this).attr("class", $(this).attr("data-not-favorite"))
+            $(this).attr("data-state", "not");
+            if ($(this).attr("data-src") === "eventBrite") {
+                //remove from eventBrite faves
+                remEBFav(currentUser, $(this).attr("data-id"))
+            }
+            else if($(this).attr("data-src") === "meetup"){
+                // remove from meetup faves
+                remMUFav(currentUser, $(this).attr("data-id"))
+            }
+        }
+    })
 
     //MEETUP Query
     function getMeetUp() {
@@ -215,14 +243,7 @@ $(document).ready(function () {
         newEvent = new Event(event.name, date, event.link, event.next_event.name, "meetup", event.next_event.id, event.urlname);
     }
 
-    //Meetup favorites 
-    function getMeetupFavorites(idArray) {
-        var meetupArray = [];
-        idArray.forEach(function (e) {
-            meetupArray.push(returnMeetupFav(e))
-        })
-    }
-
+    
     function returnMeetupFav(id, urlName) {
         var pre = "https://cors-anywhere.herokuapp.com/";
         var meetupKey = "221a475e5932e6c6c497a294d424e30";
@@ -246,14 +267,30 @@ $(document).ready(function () {
 
     $("#submit-Search").on("click", function () {
         event.preventDefault();
-        query = $("#search-Event").val().trim();
-        zipcode = $("#search-Number").val().trim();
-        distance = $("#search-Location").val().trim();
-        events = [];
-        noResults();
-        getEventBrite();
-        getMeetUp();
-        console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
+        $("#results-display").empty()
+        if (query !== $("#search-Event").val().trim() || zipcode !== $("#search-Number").val().trim() || distance !== $("#search-Location").val().trim()) {
+            query = $("#search-Event").val().trim();
+            if (query.includes("#")) {
+                // here is where we need a function asking people to not use # character
+                return;
+            }
+            zipcode = $("#search-Number").val().trim();
+            if (parseInt(zipcode) === NaN || (parseInt(zipcode) <= 501 && parseInt(zipcode) >= 99950)) {
+                // here is where we need a function for not valid zipcode
+                return;
+                // 
+
+            }
+            distance = $("#search-Location").val().trim();
+            if (parseInt(distance) === NaN) {
+                // here is where we need a function for not a valid distance
+                return;
+            }
+            events = []
+            getEventBrite();
+            getMeetUp();
+            console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
+        }
     });
 
     function isReady() {
