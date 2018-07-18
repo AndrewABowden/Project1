@@ -2,6 +2,19 @@ body {
     background-image: url("https://subtlepatterns.com/patterns/contemporary_china.png");
     font-family: 'Lustria', serif;
   }
+/* style for api elements */
+.api-Elements {
+    color: black;
+
+    padding: 7px;
+    margin: 1px;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 0px .2px darkblue;
+    background-color: white;
+
+}
+
+
 
 /*Nav Menu title */
   .navbar-brand {
