@@ -37,7 +37,7 @@ $(document).ready(function () {
                             /* Insert HTML formatting for MeetUp Favorites here */
                             if (document.URL.contains("favorites")) {
                                 currentUser.muFavorites.forEach(function(e){
-                                    getMeetupFavorites(e.id, e.URL)
+                                    returnMeetupFav(e.id, e.URL)
                                 })
                             }
                             /* end of Insert HTML formatting */
@@ -180,7 +180,7 @@ $(document).ready(function () {
             // giving a link to 
             var link = $("<a>").text(e.link).attr("href", e.link)
             // creating favorite button needs a font awesome icon
-            var favBtn = $("<i>").addClass("fav-btn far fa-heart").attr("data-not-favorite", 'fav-btn far fa-heart').attr("data-favorite", "fav-btn fas fa-heart").attr("data-state", "not").attr("data-src", e.src)
+            var favBtn = $("<i>").addClass("fav-btn far fa-heart").attr("data-not-favorite", 'fav-btn far fa-heart').attr("data-favorite", "fav-btn fas fa-heart").attr("data-state", "not").attr("data-src", e.src).attr("data-id", e.id).attr("data-url-name", e.urlName)
             // appending it all to the ruler
             containingDiv.append(title, date, sum, link, favBtn)
             // showing it on the screen
@@ -195,13 +195,24 @@ $(document).ready(function () {
             $(this).attr("data-state", "faved")
             if ($(this).attr("data-src") === "eventBrite") {
                 //add to eventBrite faves
-
+                setEBFav($(this).attr("data-id"))
+            }
+            else if($(this).attr("data-src") === "meetup"){
+                // add to meetup faves
+                setMUFav($(this).attr("data-id"), $(this).attr("data-url-name"))
             }
         }
         else if ($(this).attr("data-state") === "faved") {
             $(this).attr("class", $(this).attr("data-not-favorite"))
             $(this).attr("data-state", "not");
-            //then remove from favorites
+            if ($(this).attr("data-src") === "eventBrite") {
+                //remove from eventBrite faves
+                remEBFav(currentUser, $(this).attr("data-id"))
+            }
+            else if($(this).attr("data-src") === "meetup"){
+                // remove from meetup faves
+                remMUFav(currentUser, $(this).attr("data-id"))
+            }
         }
     })
 
@@ -228,10 +239,7 @@ $(document).ready(function () {
         newEvent = new Event(event.name, date, event.link, event.next_event.name, "meetup", event.next_event.id, event.urlname);
     }
 
-    //Meetup favorites 
-    function getMeetupFavorites() {
-
-    }
+    
 
     function returnMeetupFav(id, urlName) {
         var pre = "https://cors-anywhere.herokuapp.com/";
