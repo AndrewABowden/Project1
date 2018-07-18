@@ -145,15 +145,15 @@ a active {
 
 #register {
     padding: 4px;
-    background-color: red;
+    background-color: #cc0505;
     box-shadow: 1px black;
     border-width: 2px;
-    border: 1px solid darkred;
+    border: 1px solid black;;
 }
 .col-12 {
     margin-top: 75px;
 }
 
-.row { 
-    padding-top: 0px !important;
+.about-Me {
+    background-color: whitesmoke;
 }
