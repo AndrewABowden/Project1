@@ -20,7 +20,8 @@
     <!--Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Lustria" rel="stylesheet">
     <!-- Font Awesome-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
 
     <title>Eventer App</title>
 
@@ -28,16 +29,15 @@
 
 <body>
     <header>
-            <div class="container">
-                    <!-- Nav tabs -->
-                    <div class="fixed-top">
-                        <nav class="nav navbar-dark bg-dark rounded">
-                            <div class="nav " role="navigation ">
-                                <ul class="nav nav-tabs " role="tablist ">
-            
-                                    <a class="navbar-brand" href="#"></a>
-                                    <img src="assets/images/image_logo_3.png">
-                                    
+        <!-- Nav tabs -->
+        <div class="container ">
+            <nav class="nav navbar-dark bg-dark rounded">
+                <div class="nav " role="navigation ">
+                    <ul class="nav nav-tabs " role="tablist ">
+                        <a class="navbar-brand" href="#"></a>
+                        <img src="assets/images/logo_small.png">
+                        </a>
+
                         <ul class="navbar-nav mr-auto "></ul>
                         <li class="nav-link ">
                             <a href="index.html" aria-controls="index
@@ -47,77 +47,72 @@
                             <a href="favorites.html" aria-controls="favorites" role="tab
                                                                             " data-toggle "tab ">Favorites</a>
                         </li>
-                       
+
                         <li class="nav-link ">
                                 <a href="#" aria-controls="contact " role="tab
                                             " data-toggle "tab ">Log Out</a>
                         </li>
                     </ul>
                 </div>
-                </nav>
-                </div>
-            </div>
-        </header>
-   <!--class="input-group"> -->
-<div class="container">
-   <div class="row">
-        <div class="container">
-                <!--d block makes this a block and overrides flex-->
-             
-                    
-                <div class="row">
-                    <div class="col-12">
-                        <div class="search-form rounded">
-                            <h3 class="header rounded">Register</h3>
-                        </div>
-            <form id="my-form" action="">
-                <div class="form-group">
-                    <label for="user-Email">User Email: </label>
-                    <input type="text" class="form-control" placeholder="Email.." id="user-Email" value="">
-                        <span class="emsg hidden" id="email-Error">Enter a valid email address.</span>
-                
-                </div>
-                <div class="form-group">
-                    <label for="first-Name">First Name: </label>
-                    <input type="text" class="form-control" placeholder="First Name.." id="first-Name" value="">
-                   
-                        <span class="emsg hidden" id="name-Error">.</span>
-                  
-                </div>
-                <div class="form-group">
-                    <label for="last-Name">Last Name: </label>
-                    <input type="text" class="form-control" placeholder="Last Name.." id="last-Name">
-                    
-                        <span class="emsg hidden" id="name-Error"></span>
-                 
-                </div>
-                <div class="form-group">
-                    <label for="user-Password">Password: </label>
-                    <input type="password" class="form-control" placeholder="......." id="user-Password">
-                    
-                        <span class="emsg hidden" id="passwd-Error">6 Digits please!</span>
-                   
-                </div>
-                <div class="form-group">
-                        <label for="password">Zipcode: </label>
-                    <input type="text" class="form-control" placeholder="######" id="user-Zip">
-                   
-                        <span class="emsg hidden" id="zip-Error">Enter a valid 5 digit zipcode.</span>
-                  
-                </div>
-                <div>
-                    <button class="btn btn-primary" id="register">Register</button>
-                </div>
-
-            </form>
+            </nav>
         </div>
+  
+    </header>
+    <!--class="input-group" -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div>
+                    <class="search-form rounded">
+                        <h3 class="header-small rounded">Register!</h3>
+                </div>
+              <!--  <form id="my-form" action="">  -->
+                    <div class="form-group">
+                        <label form="user-Emaill">User Email: </label>
+                        <input type="text" class="form-control" placeholder="Email.." id="user-Email" value="">
+                        <span class="emsg hidden" id="email-Error">Enter a valid email address.</span>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="first-Name">First Name: </label>
+                        <input type="text" class="form-control" placeholder="First Name.." id="first-Name" value="">
+
+                        <span class="emsg hidden" id="firstname-error">.</span>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="last-Name">Last Name: </label>
+                        <input type="text" class="form-control" placeholder="Last Name.." id="last-Name">
+
+                        <span class="emsg hidden" id="lastname-error"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="user-Passwordl">Password: </label>
+                        <input type="password" class="form-control" placeholder="......." id="user-Password">
+
+                        <span class="emsg hidden" id="passwd-Error">Your password must be six characters long.</span>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Zipcode: </label>
+                        <input type="text" class="form-control" placeholder="######" id="user-Zip">
+
+                        <span class="emsg hidden" id="zip-Error">Enter a valid 5 digit zipcode.</span>
+
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" id="register">Register</button>
+                    </div>
+
+           <!--    </form> -->
+            </div>
+        </div>
+
+
     </div>
-        
-      
-</div>
- <!-- Footer Links -->
+    <!-- Footer Links -->
  <footer>
-        
         <style>
                 .footer {
                     position: fixed;
@@ -131,9 +126,6 @@
                     text-align: center;
                 }
                 </style>
-                
-               
-
 
     <div class="footer">Created by
         <b>The Romantic Ravens</b>
@@ -141,22 +133,19 @@
 
 </footer>
 
-
     <!-- jQuery minified -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
+
     <!-- Latest compiled and minified Bootstrap JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
-        
+
     <!-- My JS -->
-    <script src="config.js"></script>
-    <script src="assets/javascript/app.js"></script>
     <script src="assets/javascript/firebase.js"></script>
-    <script src="assets/javascript/login.js"></script>
     <script src="assets/javascript/registration.js"></script>
+
+
 </body>
 
 </html>
-
-
