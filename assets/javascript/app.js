@@ -28,6 +28,7 @@ $(document).ready(function () {
                             /* Insert HTML formatting for Event Brite Favorites here */
                             if (document.URL.includes("favorites")) {
                                 if (currentUser.ebFavorites.length > 0) {
+                                    console.log(currentUser.ebFavorites)
                                     currentUser.ebFavorites.forEach(function (e) { returnEventBriteFavorite(e) })
                                 }
                                 else {
@@ -43,6 +44,7 @@ $(document).ready(function () {
                             /* Insert HTML formatting for MeetUp Favorites here */
                             if (document.URL.includes("favorites") > 0) {
                                 if (currentUser.muFavorites.length) {
+                                    console.log(currentUser.muFavorites)
                                     currentUser.muFavorites.forEach(function (e) {
                                         returnMeetupFav(e.id, e.URL)
                                     })
@@ -186,33 +188,34 @@ $(document).ready(function () {
 
     function populateEvents() {
         $("#results-display").empty()
-        // creating a div to rule them all
-        var containingDiv = $("<div>").addClass("api-Elements");
-        console.log(events)
-        console.log("populate called")
-        if (events.length === 0) {
-            var noResults = $("<p>").addClass("text-center").text("There are no results that meet your search parameters. Try increaseing your search distance.");
-            $(containingDiv).append(noResults);
-            $("#results-display").append(containingDiv);
-            console.log("no results");
-        } else {
-            events.forEach(function (e) {
-                // creating the title of the gathering
-                var title = $("<h2>").text(e.name)
-                // showing the date
-                var date = $("<p>").text(e.date.format("MMMM DD YYYY hh:mm a"))
-                // showing the summary
-                var sum = $("<p>").text(e.info)
-                // giving a link to 
-                var link = $("<a>").text(e.link).attr("href", e.link)
-                // creating favorite button needs a font awesome icon
-                var favBtn = $("<i>").addClass("fav-btn far fa-heart").attr("data-not-favorite", 'fav-btn far fa-heart').attr("data-favorite", "fav-btn fas fa-heart").attr("data-state", "not").attr("data-src", e.src).attr("data-id", e.id).attr("data-url-name", e.urlName)
-                // appending it all to the ruler
-                containingDiv.append(title, date, sum, link, favBtn)
-                // showing it on the screen
-                $("#results-display").append(containingDiv)
-            })
-        }
+        events.forEach(function (e) {
+            // creating a div to rule them all
+            var containingDiv = $("<div>").addClass("apielements")
+            // creating the title of the gathering
+            var title = $("<h2>").text(e.name)
+            // showing the date
+            var date = $("<p>").text(e.date.format("MMMM DD YYYY hh:mm a"))
+            // showing the summary
+            var sum = $("<p>").text(e.info)
+            // giving a link to 
+            var link = $("<a>").text(e.link).attr("href", e.link)
+            // creating favorite button needs a font awesome icon
+            var favBtn = $("<i>").addClass("fav-btn far fa-heart").attr("data-not-favorite", 'fav-btn far fa-heart').attr("data-favorite", "fav-btn fas fa-heart").attr("data-state", "not").attr("data-src", e.src).attr("data-id", e.id).attr("data-url-name", e.urlName)
+            // appending it all to the ruler
+            containingDiv.append(title, date, sum, link, favBtn)
+            if(e.src === "eventBrite"){
+                if(currentUser.ebFavorites.indexOf(e.id) > -1){
+                    favBtn.attr("class", favBtn.attr("data-favorite")).attr("data-state", "faved")
+                }
+            }else if(e.src === "meetup"){
+                //we cannot directly use indexOf() since this is an array of objects, so I had to write out this crazy statement.
+                if(currentUser.muFavorites.find(function(element){return element.id === e.id})!== undefined){
+                    favBtn.attr("class", favBtn.attr("data-favorite")).attr("data-state", "faved")
+                }
+            }
+            // showing it on the screen
+            $("#results-display").append(containingDiv)
+        })
     }
 
     $(document).on("click", ".fav-btn", function () {
@@ -226,7 +229,7 @@ $(document).ready(function () {
             }
             else if ($(this).attr("data-src") === "meetup") {
                 // add to meetup faves
-                setMUFav($(this).attr("data-id"), $(this).attr("data-url-name"))
+                setMUFav(currentUser.userID,$(this).attr("data-id"), $(this).attr("data-url-name"))
             }
         }
         else if ($(this).attr("data-state") === "faved") {
