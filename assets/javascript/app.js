@@ -26,14 +26,18 @@ $(document).ready(function () {
                     loadEBFavorites(currentUser.userID)
                         .then(function () {
                             /* Insert HTML formatting for Event Brite Favorites here */
-
+                            if(document.URL.contains("favorites")){
+                                current.ebFavorites.forEach(returnEventBriteFavorite(e));
+                            }
                             /* end of Insert HTML formatting */
                         })
                         .catch(function () { console.log("Error getting EB Favorites") });
                     loadMUFavorites(currentUser.userID)
                         .then(function () {
                             /* Insert HTML formatting for MeetUp Favorites here */
-
+                            if(document.URL.contains("favorites")){
+                                current.muFavorites.forEach(function(e))
+                            }
                             /* end of Insert HTML formatting */
                         })
                         .catch(function () { console.log("Error getting MU Favorites") });
