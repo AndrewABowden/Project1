@@ -102,7 +102,7 @@ $(document).ready(function () {
                     var some = snap.val()
                     if (some !== null) {
                         Object.values(some).forEach(function (childSnapshot, i) {
-                            var childKey = childSnapshot.eID;
+                        var childKey = childSnapshot.eID;
                             var childVal = childSnapshot.eURL;
                             var muObj = { id: childKey, URL: childVal }
                             muFavs.push(muObj);
@@ -331,8 +331,8 @@ $(document).ready(function () {
 
             }
             distance = $("#search-Location").val().trim();
-            if (parseInt(distance) === NaN) {
-                // here is where we need a function for not a valid distance
+            if (parseInt(distance) === NaN && parseInt(distance) <= 100) {
+                // here is where we need a function for not a valid distance, or needs to be less than 100.
                 return;
             }
             events = []
@@ -340,7 +340,6 @@ $(document).ready(function () {
             $("#results-display").append(spinner);
             getEventBrite();
             getMeetUp();
-            console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
         }
     });
 
