@@ -20,47 +20,39 @@
     <!--Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Lustria" rel="stylesheet">
     <!-- Font Awesome-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
+
     <title>Eventer App</title>
 
 
 </head>
 
 <body>
-<header>
-    <div class="container">
-        <!-- Nav tabs -->
-        <div class="fixed-top">
-            <nav class="nav navbar-dark bg-dark rounded">
-                <div class="nav " role="navigation ">
-                    <ul class="nav nav-tabs " role="tablist ">
+    <header>
+        <nav class="nav navbar-expand-md navbar-inverse fixed-top">
+            <a class="navbar-brand" href="#"></a>
+            <img src="assets/images/logo_green.png">
 
-                        <a class="navbar-brand" href="#"></a>
-                        <img src="assets/images/image_logo_3.png">
-
-
-                        <ul class="navbar-nav mr-auto "></ul>
-                        <li class="nav-link ">
-                            <a href="index2.html " aria-controls="index
-                                                    " role="tab " data-toggle "tab ">Home</a>
-                        </li>
-                        <li class="nav-link ">
-                            <a href="favorites.html" class="active " aria-controls="favorites " role="tab
-                                                    " data-toggle "tab ">Favorites</a>
-                            </li>
-        
-                            <li class="nav-link ">
-                                <a href="index.html " aria-controls="contact" onclick="logOut()" role="tab
-                                                        " data-toggle "tab ">Log Out</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-
-</header>
+            <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-link">
+                        <a href="index2.html " class="active " aria-controls="index" role="tab " data-toggle "tab ">Home</a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="favorites.html" aria-controls="favorites " role="tab" data-toggle "tab ">Favorites</a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#" aria-controls="contact " onclick="logOut()" role="tab" data-toggle "tab ">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
     <div class="container">
         <!--d block makes this a block and overrides flex-->
@@ -75,30 +67,30 @@
                 <div class="search-form rounded">
                     <h3 class="header rounded">Favorites</h3>
                 </div>
-    
-    
+
+
                 <div class="favorites-Display rounded">
                     <!-- Sry, changed this so that I didn't have to write a new function -Colton -->
                     <h3 class="header-small rounded">
-                   
+
                     </h3>
                     <div id="results-display">
-    
+
                     </div>
                     <!--Results Form End div-->
                 </div>
-    
+
             </div>
-    
+
             <!--Container End-->
         </div>
-    
+
     </div>
     <footer>
 
         <div class="footer">Created by
             <b>The Romantic Ravens</b>
-        </div> 
+        </div>
 
     </footer>
 
@@ -108,11 +100,11 @@
     <!-- Latest compiled and minified Bootstrap JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
-        
-<!-- My JS -->
-<script src="assets/javascript/app.js"></script>
-<script src="assets/javascript/firebase.js"></script>
-<script src="assets/javascript/login.js"></script>
+
+    <!-- My JS -->
+    <script src="assets/javascript/app.js"></script>
+    <script src="assets/javascript/firebase.js"></script>
+    <script src="assets/javascript/login.js"></script>
 </body>
 
 </html>

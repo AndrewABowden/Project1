@@ -323,7 +323,7 @@ $(document).ready(function () {
             var spinner = $("<i>").addClass("fas fa-spinner fa-spin fa-4x");
             $("#results-display").append(spinner);
             getEventBrite();
-            getMeetUp();
+            getMeetUp();    
         }
     });
 

@@ -29,63 +29,55 @@
 </head>
 
 <body>
-<header>
-    <div class="container">
-        <!-- Nav tabs -->
-        <div class="fixed-top">
-            <nav class="nav navbar-dark bg-dark rounded">
-                <div class="nav " role="navigation ">
-                    <ul class="nav nav-tabs " role="tablist ">
+    <header>
+        <nav class="nav navbar-expand-md navbar-inverse fixed-top">
+            <a class="navbar-brand" href="#"></a>
+            <img src="assets/images/logo_green.png">
 
-                        <a class="navbar-brand" href="#"></a>
-                        <img src="assets/images/image_logo_3.png">
-                        
+            <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-link">
+                        <a href="index2.html " class="active " aria-controls="index" role="tab " data-toggle "tab ">Home</a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="favorites.html" aria-controls="favorites " role="tab" data-toggle "tab ">Favorites</a>
+                    </li>
 
-                        <ul class="navbar-nav mr-auto "></ul>
-                        <li class="nav-link ">
-                            <a href="index2.html " aria-controls="index
-                                    " role="tab " data-toggle "tab ">Home</a>
-                        </li>
-                        <li class="nav-link ">
-                            <a href="favorites.html" aria-controls="favorites " role="tab
-                                    " data-toggle "tab ">Favorites</a>
-                        </li>
-
-                        <li class="nav-link ">
-                            <a href="#" aria-controls="contact " onclick="logOut()" role="tab
-                                        " data-toggle "tab ">Log In</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-</div>
+                    <li class="nav-link">
+                        <a href="#" aria-controls="contact " onclick="logOut()" role="tab" data-toggle "tab ">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </header>
 
 
     <div class="container">
         <!--d block makes this a block and overrides flex-->
-     
-            
+
+
         <div class="row">
             <div class="col-12">
                 <div class="search-form rounded">
                     <h3 class="header rounded">Log in or Register</h3>
                 </div>
-                    <div> 
-                        <!--Email-->
-                        <label for="email">Enter Email:</label>
-                        <input class="form-control" id="user-Email" type="text" value="" placeholder="Email..">
-                    </div>
-                    <div> 
-                            <!--Password-->
-                            <label for="Password">Enter Password:</label>
-                            <input class="form-control" id="user-Password" type="password" value="" placeholder="Password..">
-                        </div>
+                <div>
+                    <!--Email-->
+                    <label for="email">Enter Email:</label>
+                    <input class="form-control" id="user-Email" type="text" value="" placeholder="Email..">
+                </div>
+                <div>
+                    <!--Password-->
+                    <label for="Password">Enter Password:</label>
+                    <input class="form-control" id="user-Password" type="password" value="" placeholder="Password..">
+                </div>
 
-                    <button id="log-in" class="btn btn-primary rounded">Log In</button>
-                    <a id="register" class="btn btn-danger rounded" href="registration.html">Register</a>
+                <button id="log-in" class="btn btn-primary rounded">Log In</button>
+                <a id="register" class="btn btn-danger rounded" href="registration.html">Register</a>
             </div>
         </div>
         <!--Container div end-->
@@ -95,70 +87,70 @@
 
         <div class="footer">Created by
             <b>The Romantic Ravens</b>
-        </div> 
+        </div>
 
     </footer>
 
-<!-- Model for wrong password-->
+    <!-- Model for wrong password-->
 
-<div class="modal" tabindex="-1" role="dialog" id="modal-wrongPWD">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Login Error</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <div class="modal" tabindex="-1" role="dialog" id="modal-wrongPWD">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login Error</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Incorrect Password.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>Incorrect Password.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Model for wrong password-->
+    <!-- Model for wrong password-->
 
-<div class="modal" tabindex="-1" role="dialog" id="modal-userNotFound">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Login Error</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <div class="modal" tabindex="-1" role="dialog" id="modal-userNotFound">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login Error</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Email address not assoicated to an account. Please register.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>Email address not assoicated to an account. Please register.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <div class="modal" tabindex="-1" role="dialog" id="modal-invalidEmail">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Login Error</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <div class="modal" tabindex="-1" role="dialog" id="modal-invalidEmail">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login Error</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Please enter a valid email address.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>Please enter a valid email address.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
 
     <!-- jQuery minified -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -169,8 +161,8 @@
 
     <!-- My JS -->
 
- <script src="assets/javascript/firebase.js"></script>
- <script src="assets/javascript/login.js"></script>
+    <script src="assets/javascript/firebase.js"></script>
+    <script src="assets/javascript/login.js"></script>
 </body>
 
 </html>
