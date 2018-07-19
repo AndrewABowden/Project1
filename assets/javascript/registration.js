@@ -104,8 +104,6 @@ $("#register").on("click", function (event) {
              .then(user => {
                  // Make the database entries from user
                  database.ref("/users/" + user.user.uid).set({ email: user.user.email, firstName: $("#first-Name").val(), lastName: $("#last-Name").val(), userZip: $("#user-Zip").val() });
-                 console.log($("#user-firstName").val());
-                 console.log($("#user-lastName").val());
                  window.location.href = "index2.html";
              })
              .catch(e => {
