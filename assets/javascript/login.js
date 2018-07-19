@@ -11,14 +11,19 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 function loginError(error) {
-    console.log(error);
-    if (error == "auth/user-not-found") {
-        alert("You do not have an account, please register.");
+    if (error === "auth/user-not-found") {
+        $('#modal-userNotFound').modal({
+            show: true
+        })
     }
-    else if (error = "auth/wrong-password") {
-        alert("Incorrect password.");
+    else if (error === "auth/invalid-email") {
+        $('#modal-invalidEmail').modal({
+            show: true
+        })
     }
-    else if (error = "auth/invalid-email") {
-        alert("Please use a valid email address");
+    else if (error === "auth/wrong-password") {
+        $('#modal-wrongPWD').modal({
+            show: true
+        })
     }
 }
