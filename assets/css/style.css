@@ -93,34 +93,8 @@ a active {
     border-radius: 4px;
     box-shadow: 5px 5px 5px rgba(18, 0, 41, 0.5);
     transition: box-shadow 1s;
-    animation: bounceIn 2s;
+    animation: bounceIn 2s; */
       
-} */
-/* styles add later 
-.crystals  {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-.crystal {
-    border: 2px solid black;
-    height: 200px;
-    width: 200px;
-    border-radius: 4px;
-    box-shadow: 5px 5px 5px rgba(18, 0, 41, 0.5);
-    transition: box-shadow 1s;
-    animation: bounceIn 2s;
-      
-}
-.crystal:hover{
-    box-shadow: 15px 15px 15px rgba(0, 0 , 0, 0.5);
-    cursor: pointer;
-    transition: box-shadow 1s;
-}
-*/
-
-
-
 .header {
     align-content: center;
     text-align: center;

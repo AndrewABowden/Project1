@@ -26,7 +26,7 @@ $(document).ready(function () {
                     if (document.URL.includes("index2")) {
                         $("#search-Number").val(currentUser.userZip);
                     }
-                    
+
                     /* end of Insert HTML formatting */
                     loadEBFavorites(currentUser.userID)
                         .then(function () {
@@ -261,13 +261,17 @@ $(document).ready(function () {
         var pre = "https://cors-anywhere.herokuapp.com/";
         var meetupKey = "221a475e5932e6c6c497a294d424e30";
         var meetupURL = pre + "api.meetup.com/find/groups?key=" + meetupKey + "&photo-host=public&zip=" + zipcode + "&upcoming_events=true&text=" + query + "&radius=" + distance;
-        //console.log(meetupURL);
+        console.log(meetupURL);
         $.ajax({
             url: meetupURL,
             method: "GET"
         }).then(function (res) {
+            console.log(res);
             res.forEach(element => {
-                formatMeetUp(element);
+                //had to add this because events were populating despite not having current event
+                if (element.next_event) {
+                    formatMeetUp(element);
+                }
             });
             isReady();
         });
@@ -332,6 +336,8 @@ $(document).ready(function () {
                 return;
             }
             events = []
+            var spinner = $("<i>").addClass("fas fa-spinner fa-spin fa-4x");
+            $("#results-display").append(spinner);
             getEventBrite();
             getMeetUp();
             console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
@@ -343,6 +349,7 @@ $(document).ready(function () {
         if (readyCheck === 2) {
             sortEvents()
             readyCheck = 0;
+            $(".fa-spinner").remove();
         }
     }
 
