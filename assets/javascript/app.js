@@ -247,11 +247,11 @@ $(document).ready(function () {
             $(this).attr("data-state", "not");
             if ($(this).attr("data-src") === "eventBrite") {
                 //remove from eventBrite faves
-                remEBFav(currentUser, $(this).attr("data-id"))
+                remEBFav(currentUser.userID, $(this).attr("data-id"))
             }
             else if ($(this).attr("data-src") === "meetup") {
                 // remove from meetup faves
-                remMUFav(currentUser, $(this).attr("data-id"))
+                remMUFav(currentUser.userID, $(this).attr("data-id"))
             }
         }
     })
@@ -349,6 +349,8 @@ $(document).ready(function () {
         if (readyCheck === 2) {
             sortEvents()
             readyCheck = 0;
+            var header = $("<h3>").addClass("header-small rounded").text("Top Events:");
+            $("#results-display").prepend(header);
             $(".fa-spinner").remove();
         }
     }

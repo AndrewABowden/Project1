@@ -21,6 +21,7 @@ body > .container {
     position: relative;
 
 }
+
 /*footer*/
 .footer {
     position: fixed;
@@ -44,9 +45,6 @@ body > .container {
   .nav {
     width: 100%;
     background-color: #060925;
-  
-    
-
     border-radius: 1px;
     box-shadow: 1x 1px 1px 1px black;
     font-family: 'Lustria', serif;
@@ -74,17 +72,17 @@ li active {
     color: white;
 }
 a {
-    color: lightblue;
+    color: whitesmoke;
 
 }
 .active {
-    color: white;
+    color: #007bff;
 }
-a hover {
-    color: white;
+a:hover {
+    color: #46B209;
 }
-a active {
-    color: white;
+a:active {
+    color: whitesmoke;
 }
 
 /* API Content Container */
@@ -119,7 +117,19 @@ a active {
 .results-form {
     margin-top: 10px;
 }
-
+ #clear {
+    background-color: #46B209;
+    border: 1px solid #46B209;
+    padding-left: 7px;
+    padding-right: 7px;
+ }
+ #clear:hover {
+    background-color: #3C9908;
+    border: 1px solid #3C9908;
+ }
+ .fa-spinner {
+     color: #3C9908;
+ }
 
 /* Matt Firebase Login/Registration API Styling */
 .emsg{
@@ -131,10 +141,14 @@ a active {
 
 #register {
     padding: 5.5px;
-    background-color: #cc0505;
-    box-shadow: 1px black;
+    background-color: #46B209;
     border-width: 2px;
-    border: 1px solid black;;
+    border: 1px solid #46B209;;
+}
+#register:hover {
+    background-color: #3C9908;
+    border-width: 2px;
+    border: 1px solid #3C9908;;
 }
 .col-12 {
     margin-top: 75px;
@@ -154,5 +168,5 @@ a active {
    position: absolute;
    top: 10px;
    right: 10px;
-   color: #57CC14;
+   color: #46B209;
 }
