@@ -191,27 +191,6 @@ $(document).ready(function () {
 
     function populateEvents() {
         $("#results-display").empty()
-<<<<<<< HEAD
-        console.log("populate called")
-        events.forEach(function (e) {
-            // creating a div to rule them all
-            var containingDiv = $("<div>").addClass("api-Elements");
-            // creating the title of the gathering
-            var title = $("<h2>").text(e.name)
-            // showing the date
-            var date = $("<p>").text(e.date.format("MMMM DD YYYY hh:mm a"))
-            // showing the summary
-            var sum = $("<p>").text(e.info)
-            // giving a link to 
-            var link = $("<a>").text(e.link).attr("href", e.link)
-            // creating favorite button needs a font awesome icon
-            var favBtn = $("<i>").addClass("fav-btn far fa-heart").attr("data-not-favorite", 'fav-btn far fa-heart').attr("data-favorite", "fav-btn fas fa-heart").attr("data-state", "not").attr("data-src", e.src).attr("data-id", e.id).attr("data-url-name", e.urlName)
-            // appending it all to the ruler
-            containingDiv.append(title, date, sum, link, favBtn)
-            // showing it on the screen
-            $("#results-display").append(containingDiv)
-        })
-=======
         if (events.length === 0) {
             var containingDiv = $("<div>").addClass("api-Elements")
             var noResults = $("<p>").addClass("text-center").text("There are no results that meet your search parameters. Try increasing your search distance.");
@@ -247,7 +226,6 @@ $(document).ready(function () {
                 $("#results-display").append(containingDiv)
             })
         }
->>>>>>> 80a9e4f461993866557d9874275a877b39a801ad
     }
 
     $(document).on("click", ".fav-btn", function () {
