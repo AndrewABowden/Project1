@@ -22,6 +22,11 @@ $(document).ready(function () {
                     currentUser.userZip = snapshot.val().userZip;
                     /* Insert HTML Formatting here for user information. */
 
+                    // Populated zipcode with user zipcode
+                    if (document.URL.includes("index2")) {
+                        $("#search-Number").val(currentUser.userZip);
+                    }
+
                     /* end of Insert HTML formatting */
                     loadEBFavorites(currentUser.userID)
                         .then(function () {
@@ -204,7 +209,7 @@ $(document).ready(function () {
                 // giving a link to 
                 var link = $("<a>").text(e.link).attr("href", e.link)
                 // creating favorite button needs a font awesome icon
-                var favBtn = $("<i>").addClass("fav-btn far fa-heart").attr("data-not-favorite", 'fav-btn far fa-heart').attr("data-favorite", "fav-btn fas fa-heart").attr("data-state", "not").attr("data-src", e.src).attr("data-id", e.id).attr("data-url-name", e.urlName)
+                var favBtn = $("<i>").addClass("fav-btn far fa-heart fa-2x").attr("data-not-favorite", 'fav-btn far fa-heart fa-2x').attr("data-favorite", "fav-btn fas fa-heart fa-2x").attr("data-state", "not").attr("data-src", e.src).attr("data-id", e.id).attr("data-url-name", e.urlName)
                 // appending it all to the ruler
                 containingDiv.append(title, date, sum, link, favBtn)
                 if (e.src === "eventBrite") {
@@ -242,11 +247,11 @@ $(document).ready(function () {
             $(this).attr("data-state", "not");
             if ($(this).attr("data-src") === "eventBrite") {
                 //remove from eventBrite faves
-                remEBFav(currentUser, $(this).attr("data-id"))
+                remEBFav(currentUser.userID, $(this).attr("data-id"))
             }
             else if ($(this).attr("data-src") === "meetup") {
                 // remove from meetup faves
-                remMUFav(currentUser, $(this).attr("data-id"))
+                remMUFav(currentUser.userID, $(this).attr("data-id"))
             }
         }
     })
@@ -256,13 +261,17 @@ $(document).ready(function () {
         var pre = "https://cors-anywhere.herokuapp.com/";
         var meetupKey = "221a475e5932e6c6c497a294d424e30";
         var meetupURL = pre + "api.meetup.com/find/groups?key=" + meetupKey + "&photo-host=public&zip=" + zipcode + "&upcoming_events=true&text=" + query + "&radius=" + distance;
-        //console.log(meetupURL);
+        console.log(meetupURL);
         $.ajax({
             url: meetupURL,
             method: "GET"
         }).then(function (res) {
+            console.log(res);
             res.forEach(element => {
-                formatMeetUp(element);
+                //had to add this because events were populating despite not having current event
+                if (element.next_event) {
+                    formatMeetUp(element);
+                }
             });
             isReady();
         });
@@ -327,6 +336,8 @@ $(document).ready(function () {
                 return;
             }
             events = []
+            var spinner = $("<i>").addClass("fas fa-spinner fa-spin fa-4x");
+            $("#results-display").append(spinner);
             getEventBrite();
             getMeetUp();
             console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
@@ -338,6 +349,9 @@ $(document).ready(function () {
         if (readyCheck === 2) {
             sortEvents()
             readyCheck = 0;
+            var header = $("<h3>").addClass("header-small rounded").text("Top Events:");
+            $("#results-display").prepend(header);
+            $(".fa-spinner").remove();
         }
     }
 
