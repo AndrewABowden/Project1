@@ -22,23 +22,41 @@ $(document).ready(function () {
                     currentUser.userZip = snapshot.val().userZip;
                     /* Insert HTML Formatting here for user information. */
 
+                    // Populated zipcode with user zipcode
+                    if (document.URL.includes("index2")) {
+                        $("#search-Number").val(currentUser.userZip);
+                    }
+
                     /* end of Insert HTML formatting */
                     loadEBFavorites(currentUser.userID)
                         .then(function () {
                             /* Insert HTML formatting for Event Brite Favorites here */
-                            if (document.URL.contains("favorites")) {
-                                currentUser.ebFavorites.forEach(returnEventBriteFavorite(e))
+                            if (document.URL.includes("favorites")) {
+                                if (currentUser.ebFavorites.length > 0) {
+                                    console.log(currentUser.ebFavorites)
+                                    currentUser.ebFavorites.forEach(function (e) { returnEventBriteFavorite(e) })
+                                }
+                                else {
+                                    console.log("no ebfavorites")
+                                    isReady()
+                                }
                             }
                             /* end of Insert HTML formatting */
                         })
-                        .catch(function () { console.log("Error getting EB Favorites") });
+                    //.catch(function () { console.log("Error getting EB Favorites") });
                     loadMUFavorites(currentUser.userID)
                         .then(function () {
                             /* Insert HTML formatting for MeetUp Favorites here */
-                            if (document.URL.contains("favorites")) {
-                                currentUser.muFavorites.forEach(function(e){
-                                    returnMeetupFav(e.id, e.URL)
-                                })
+                            if (document.URL.includes("favorites")) {
+                                if (currentUser.muFavorites.length > 0) {
+                                    console.log(currentUser.muFavorites)
+                                    currentUser.muFavorites.forEach(function (e) {
+                                        returnMeetupFav(e.id, e.URL)
+                                    })
+                                } else {
+                                    console.log("no muFavorites")
+                                    isReady();
+                                }
                             }
                             /* end of Insert HTML formatting */
                         })
@@ -48,8 +66,6 @@ $(document).ready(function () {
                     console.log("The read failed: " + errorObject.code);
                     reject("Read Error");
                 });
-
-
             }
             // if user is not logged in, send them to the log in page
             else {
@@ -65,11 +81,13 @@ $(document).ready(function () {
             var ebFavs = [];
             database.ref("/users/" + uID + "/EBFavs").once("value")
                 .then(function (snap) {
-                    console.log(snap.val())
-                    snap.forEach(function (childSnapshot) {
-                        var childObject = childSnapshot.val();
-                        ebFavs.push(childObject);
-                    });
+                    var some = snap.val()
+                    if (some !== null) {
+                        Object.values(some).forEach(function (childSnapshot) {
+                            var childObject = childSnapshot;
+                            ebFavs.push(childObject);
+                        });
+                    }
                     currentUser.ebFavorites = ebFavs;
                     return resolve();
                 });
@@ -81,14 +99,18 @@ $(document).ready(function () {
             var muFavs = [];
             database.ref("/users/" + uID + "/MUFavs").once("value")
                 .then(function (snap) {
-                    console.log(snap.val())
-                    snap.val().forEach(function (childSnapshot) {
-                        var childKey = childSnapshot.key;
-                        var childVal = childSnapshot.val().eURL;
-                        var muObj = { id: childKey, URL: childVal }
-                        muFavs.push(muObj);
-                    });
+                    var some = snap.val()
+                    if (some !== null) {
+                        Object.values(some).forEach(function (childSnapshot, i) {
+                            var childKey = childSnapshot.eID;
+                            var childVal = childSnapshot.eURL;
+                            var muObj = { id: childKey, URL: childVal }
+                            muFavs.push(muObj);
+                            console.log(muFavs[i])
+                        });
+                    }
                     currentUser.muFavorites = muFavs;
+                    console.log(currentUser.muFavorites)
                     return resolve();
                 });
         })
@@ -106,7 +128,7 @@ $(document).ready(function () {
     var distance = 10;
     var token = "OPXO3YNHODUWUYTO6G2N";
     var eventBriteNum = 0;
-    var eventMeetupNum = 0;
+    var meetupNum = 0;
 
     class Event {
         constructor(name, date, link, info, src, id, urlName) {
@@ -131,7 +153,7 @@ $(document).ready(function () {
             url: eventBriteURL,
             method: "GET"
         }).then(function (res) {
-            //console.log(res)
+            // console.log(res)
             res.events.forEach(element => {
                 formatEventBriteData(element)
             });
@@ -153,7 +175,7 @@ $(document).ready(function () {
     }
     function checkEventBriteFinished() {
         eventBriteNum++
-        if (eventBriteNum === eventBriteIds.length) {
+        if (eventBriteNum === currentUser.ebFavorites.length) {
             eventBriteNum = 0;
             isReady();
             //console.log('sorting');
@@ -169,6 +191,7 @@ $(document).ready(function () {
 
     function populateEvents() {
         $("#results-display").empty()
+<<<<<<< HEAD
         console.log("populate called")
         events.forEach(function (e) {
             // creating a div to rule them all
@@ -188,6 +211,43 @@ $(document).ready(function () {
             // showing it on the screen
             $("#results-display").append(containingDiv)
         })
+=======
+        if (events.length === 0) {
+            var containingDiv = $("<div>").addClass("api-Elements")
+            var noResults = $("<p>").addClass("text-center").text("There are no results that meet your search parameters. Try increasing your search distance.");
+            $(containingDiv).append(noResults);
+            $("#results-display").append(containingDiv);
+        } else {
+            events.forEach(function (e) {
+                // creating a div to rule them all
+                var containingDiv = $("<div>").addClass("api-Elements")
+                // creating the title of the gathering
+                var title = $("<h2>").text(e.name)
+                // showing the date
+                var date = $("<p>").text(e.date.format("MMMM DD YYYY hh:mm a"))
+                // showing the summary
+                var sum = $("<p>").text(e.info)
+                // giving a link to 
+                var link = $("<a>").text(e.link).attr("href", e.link)
+                // creating favorite button needs a font awesome icon
+                var favBtn = $("<i>").addClass("fav-btn far fa-heart fa-2x").attr("data-not-favorite", 'fav-btn far fa-heart fa-2x').attr("data-favorite", "fav-btn fas fa-heart fa-2x").attr("data-state", "not").attr("data-src", e.src).attr("data-id", e.id).attr("data-url-name", e.urlName)
+                // appending it all to the ruler
+                containingDiv.append(title, date, sum, link, favBtn)
+                if (e.src === "eventBrite") {
+                    if (currentUser.ebFavorites.indexOf(e.id) > -1) {
+                        favBtn.attr("class", favBtn.attr("data-favorite")).attr("data-state", "faved")
+                    }
+                } else if (e.src === "meetup") {
+                    //we cannot directly use indexOf() since this is an array of objects, so I had to write out this crazy statement.
+                    if (currentUser.muFavorites.find(function (element) { return element.id === e.id }) !== undefined) {
+                        favBtn.attr("class", favBtn.attr("data-favorite")).attr("data-state", "faved")
+                    }
+                }
+                // showing it on the screen
+                $("#results-display").append(containingDiv)
+            })
+        }
+>>>>>>> 80a9e4f461993866557d9874275a877b39a801ad
     }
 
     $(document).on("click", ".fav-btn", function () {
@@ -197,11 +257,11 @@ $(document).ready(function () {
             $(this).attr("data-state", "faved")
             if ($(this).attr("data-src") === "eventBrite") {
                 //add to eventBrite faves
-                setEBFav($(this).attr("data-id"))
+                setEBFav(currentUser.userID, $(this).attr("data-id"))
             }
-            else if($(this).attr("data-src") === "meetup"){
+            else if ($(this).attr("data-src") === "meetup") {
                 // add to meetup faves
-                setMUFav($(this).attr("data-id"), $(this).attr("data-url-name"))
+                setMUFav(currentUser.userID, $(this).attr("data-id"), $(this).attr("data-url-name"))
             }
         }
         else if ($(this).attr("data-state") === "faved") {
@@ -209,11 +269,11 @@ $(document).ready(function () {
             $(this).attr("data-state", "not");
             if ($(this).attr("data-src") === "eventBrite") {
                 //remove from eventBrite faves
-                remEBFav(currentUser, $(this).attr("data-id"))
+                remEBFav(currentUser.userID, $(this).attr("data-id"))
             }
-            else if($(this).attr("data-src") === "meetup"){
+            else if ($(this).attr("data-src") === "meetup") {
                 // remove from meetup faves
-                remMUFav(currentUser, $(this).attr("data-id"))
+                remMUFav(currentUser.userID, $(this).attr("data-id"))
             }
         }
     })
@@ -223,13 +283,17 @@ $(document).ready(function () {
         var pre = "https://cors-anywhere.herokuapp.com/";
         var meetupKey = "221a475e5932e6c6c497a294d424e30";
         var meetupURL = pre + "api.meetup.com/find/groups?key=" + meetupKey + "&photo-host=public&zip=" + zipcode + "&upcoming_events=true&text=" + query + "&radius=" + distance;
-        //console.log(meetupURL);
+        console.log(meetupURL);
         $.ajax({
             url: meetupURL,
             method: "GET"
         }).then(function (res) {
+            console.log(res);
             res.forEach(element => {
-                formatMeetUp(element);
+                //had to add this because events were populating despite not having current event
+                if (element.next_event) {
+                    formatMeetUp(element);
+                }
             });
             isReady();
         });
@@ -240,19 +304,36 @@ $(document).ready(function () {
         var date = moment(event.next_event.time) /*format date when populated to html*/;
         newEvent = new Event(event.name, date, event.link, event.next_event.name, "meetup", event.next_event.id, event.urlname);
     }
+    function formatMeetUpFavorite(event) {
+        var date = moment(event.time) /*format date when populated to html*/;
+        console.log(event);
+        console.log(event.name)
+        newEvent = new Event(event.name, date, event.link, event.name, "meetup", event.id, event.urlname);
+        console.log("successful formatMeetupFavorite")
+    }
 
-    
 
     function returnMeetupFav(id, urlName) {
         var pre = "https://cors-anywhere.herokuapp.com/";
         var meetupKey = "221a475e5932e6c6c497a294d424e30";
         var meetupURL = pre + "api.meetup.com/" + urlName + "/events/" + id + "?key=" + meetupKey + "&photo-host=public";
+        console.log(meetupURL);
         $.ajax({
             url: meetupURL,
             method: "GET"
         }).then(function (res) {
-            formatMeetUp(res);
+            console.log(res);
+            formatMeetUpFavorite(res);
+            checkMeetUpFinished()
         });
+    }
+
+    function checkMeetUpFinished() {
+        meetupNum++
+        if (meetupNum === currentUser.muFavorites.length) {
+            MeetupNum = 0;
+            isReady();
+        }
     }
 
     $("#submit-Search").on("click", function () {
@@ -277,6 +358,8 @@ $(document).ready(function () {
                 return;
             }
             events = []
+            var spinner = $("<i>").addClass("fas fa-spinner fa-spin fa-4x");
+            $("#results-display").append(spinner);
             getEventBrite();
             getMeetUp();
             console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
@@ -288,6 +371,9 @@ $(document).ready(function () {
         if (readyCheck === 2) {
             sortEvents()
             readyCheck = 0;
+            var header = $("<h3>").addClass("header-small rounded").text("Top Events:");
+            $("#results-display").prepend(header);
+            $(".fa-spinner").remove();
         }
     }
 
@@ -305,6 +391,7 @@ $(document).ready(function () {
         })
         populateEvents();
     }
+
     // Run this at the start of your page.. it grabs the DB info.
     promiseLoadUser.then(function (fromResolve) {
     }).catch(function (fromReject) {

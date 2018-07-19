@@ -6,26 +6,34 @@ body {
     background-image: url("https://subtlepatterns.com/patterns/contemporary_china.png");
     font-family: 'Lustria', serif;
   }
+
+body > .container {
+    margin-bottom: 80px;
+}
 /* style for api elements */
 .api-Elements {
     color: black;
-
-    padding: 20px;
+    padding: 7px;
     margin: 1px;
     margin-bottom: 10px;
     box-shadow: 0px 0px 0px .2px darkblue;
     background-color: white;
+    position: relative;
 
 }
-/*footer*/
-/* .footer {
 
-                background-color: black;
-                color: white;
-                text-align: center;
-                margin-top: 20px;
-                padding: 30px;
-} */
+/*footer*/
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 70px;
+    width: 100%;
+    padding: 20px;
+    background-color: #060925;
+    color: white;
+    text-align: center;
+}
 
 /*Nav Menu title */
   .navbar-brand {
@@ -36,10 +44,7 @@ body {
 /*Nav Menu */
   .nav {
     width: 100%;
-    background-color: #04061f;
-  
-    
-
+    background-color: #060925;
     border-radius: 1px;
     box-shadow: 1x 1px 1px 1px black;
     font-family: 'Lustria', serif;
@@ -67,17 +72,17 @@ li active {
     color: white;
 }
 a {
-    color: rgb(55, 145, 175);
+    color: whitesmoke;
 
 }
 .active {
-    color: white;
+    color: #007bff;
 }
-a hover {
-    color: white;
+a:hover {
+    color: #46B209;
 }
-a active {
-    color: white;
+a:active {
+    color: whitesmoke;
 }
 
 /* API Content Container */
@@ -86,34 +91,8 @@ a active {
     border-radius: 4px;
     box-shadow: 5px 5px 5px rgba(18, 0, 41, 0.5);
     transition: box-shadow 1s;
-    animation: bounceIn 2s;
+    animation: bounceIn 2s; */
       
-} */
-/* styles add later 
-.crystals  {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-.crystal {
-    border: 2px solid black;
-    height: 200px;
-    width: 200px;
-    border-radius: 4px;
-    box-shadow: 5px 5px 5px rgba(18, 0, 41, 0.5);
-    transition: box-shadow 1s;
-    animation: bounceIn 2s;
-      
-}
-.crystal:hover{
-    box-shadow: 15px 15px 15px rgba(0, 0 , 0, 0.5);
-    cursor: pointer;
-    transition: box-shadow 1s;
-}
-*/
-
-
-
 .header {
     align-content: center;
     text-align: center;
@@ -138,7 +117,19 @@ a active {
 .results-form {
     margin-top: 10px;
 }
-
+ #clear {
+    background-color: #46B209;
+    border: 1px solid #46B209;
+    padding-left: 7px;
+    padding-right: 7px;
+ }
+ #clear:hover {
+    background-color: #3C9908;
+    border: 1px solid #3C9908;
+ }
+ .fa-spinner {
+     color: #3C9908;
+ }
 
 /* Matt Firebase Login/Registration API Styling */
 .emsg{
@@ -150,10 +141,14 @@ a active {
 
 #register {
     padding: 5.5px;
-    background-color: #cc0505;
-    box-shadow: 1px black;
+    background-color: #46B209;
     border-width: 2px;
-    border: 1px solid black;;
+    border: 1px solid #46B209;;
+}
+#register:hover {
+    background-color: #3C9908;
+    border-width: 2px;
+    border: 1px solid #3C9908;;
 }
 .col-12 {
     margin-top: 75px;
@@ -166,4 +161,12 @@ a active {
 
 #my-form {
     padding: 6px;
+}
+
+/* Styling for favorite heart  */
+.fa-heart {
+   position: absolute;
+   top: 10px;
+   right: 10px;
+   color: #46B209;
 }
