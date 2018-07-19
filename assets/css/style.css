@@ -85,8 +85,7 @@ a:hover {
 }
 a:active {
     color: whitesmoke;
-}
-      
+}   
 .header {
     align-content: center;
     text-align: center;
@@ -97,6 +96,9 @@ a:active {
     margin-top:5px;
 
     color: white;
+}
+.event-link {
+    color: #007bff;
 }
 .search-form {
     border: .5px solid #F5ECE8;
