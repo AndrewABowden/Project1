@@ -112,7 +112,6 @@ $(document).ready(function () {
     };
 
     var eventBriteIds = [];
-    var meetupIds = [];
     var events = [];
     // this var is for testing to see if we got both our ajax calls back.
     var readyCheck = 0;
@@ -192,7 +191,6 @@ $(document).ready(function () {
             var noResults = $("<p>").addClass("text-center").text("There are no results that meet your search parameters. Try increasing your search distance.");
             $(containingDiv).append(noResults);
             $("#results-display").append(containingDiv);
-            console.log("no results");
         } else {
             events.forEach(function (e) {
                 // creating a div to rule them all
