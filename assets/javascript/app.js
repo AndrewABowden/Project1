@@ -33,37 +33,32 @@ $(document).ready(function () {
                             /* Insert HTML formatting for Event Brite Favorites here */
                             if (document.URL.includes("favorites")) {
                                 if (currentUser.ebFavorites.length > 0) {
-                                    console.log(currentUser.ebFavorites)
                                     currentUser.ebFavorites.forEach(function (e) { returnEventBriteFavorite(e) })
                                 }
                                 else {
-                                    console.log("no ebfavorites")
                                     isReady()
                                 }
                             }
                             /* end of Insert HTML formatting */
                         })
-                    //.catch(function () { console.log("Error getting EB Favorites") });
+                    .catch(function () {  });
                     loadMUFavorites(currentUser.userID)
                         .then(function () {
                             /* Insert HTML formatting for MeetUp Favorites here */
                             if (document.URL.includes("favorites")) {
                                 if (currentUser.muFavorites.length > 0) {
-                                    console.log(currentUser.muFavorites)
                                     currentUser.muFavorites.forEach(function (e) {
                                         returnMeetupFav(e.id, e.URL)
                                     })
                                 } else {
-                                    console.log("no muFavorites")
                                     isReady();
                                 }
                             }
                             /* end of Insert HTML formatting */
                         })
-                        .catch(function () { console.log("Error getting MU Favorites") });
+                        .catch(function () {  });
                     /***************************************************/
                 }, function (errorObject) {
-                    console.log("The read failed: " + errorObject.code);
                     reject("Read Error");
                 });
             }
@@ -102,15 +97,13 @@ $(document).ready(function () {
                     var some = snap.val()
                     if (some !== null) {
                         Object.values(some).forEach(function (childSnapshot, i) {
-                            var childKey = childSnapshot.eID;
+                        var childKey = childSnapshot.eID;
                             var childVal = childSnapshot.eURL;
                             var muObj = { id: childKey, URL: childVal }
                             muFavs.push(muObj);
-                            console.log(muFavs[i])
                         });
                     }
                     currentUser.muFavorites = muFavs;
-                    console.log(currentUser.muFavorites)
                     return resolve();
                 });
         })
@@ -141,19 +134,18 @@ $(document).ready(function () {
             this.id = id;
             this.urlName = urlName;
             events.push(this);
-            //console.log(this)
         }
     }
 
     //EventBrite Query
     function getEventBrite() {
         var eventBriteURL = "https://www.eventbriteapi.com/v3/events/search/?q=" + query + "&location.address=" + zipcode + "&location.within=" + distance + "mi&token=" + token
-        // console.log(eventBriteURL)
+      
         $.ajax({
             url: eventBriteURL,
             method: "GET"
         }).then(function (res) {
-            // console.log(res)
+
             res.events.forEach(element => {
                 formatEventBriteData(element)
             });
@@ -168,7 +160,6 @@ $(document).ready(function () {
             url: URL,
             method: "GET"
         }).then(function (res) {
-            //console.logconsole.log("eventbrite fave", res)
             formatEventBriteData(res);
             checkEventBriteFinished();
         })
@@ -178,15 +169,12 @@ $(document).ready(function () {
         if (eventBriteNum === currentUser.ebFavorites.length) {
             eventBriteNum = 0;
             isReady();
-            //console.log('sorting');
         }
     }
 
     function formatEventBriteData(event) {
         date = moment(event.start.local, "YYYY-MM-DD HH:mm:ss")
-        //console.log(event.id)
         e = new Event(event.name.text, date, event.url, event.description.text, "eventBrite", event.id, "");
-        //console.log(e);
     }
 
     function populateEvents() {
@@ -229,7 +217,6 @@ $(document).ready(function () {
     }
 
     $(document).on("click", ".fav-btn", function () {
-        console.log(".fav-btn clicked")
         if ($(this).attr("data-state") === "not") {
             $(this).attr("class", $(this).attr("data-favorite"))
             $(this).attr("data-state", "faved")
@@ -261,12 +248,10 @@ $(document).ready(function () {
         var pre = "https://cors-anywhere.herokuapp.com/";
         var meetupKey = "221a475e5932e6c6c497a294d424e30";
         var meetupURL = pre + "api.meetup.com/find/groups?key=" + meetupKey + "&photo-host=public&zip=" + zipcode + "&upcoming_events=true&text=" + query + "&radius=" + distance;
-        console.log(meetupURL);
         $.ajax({
             url: meetupURL,
             method: "GET"
         }).then(function (res) {
-            console.log(res);
             res.forEach(element => {
                 //had to add this because events were populating despite not having current event
                 if (element.next_event) {
@@ -284,10 +269,7 @@ $(document).ready(function () {
     }
     function formatMeetUpFavorite(event) {
         var date = moment(event.time) /*format date when populated to html*/;
-        console.log(event);
-        console.log(event.name)
         newEvent = new Event(event.name, date, event.link, event.name, "meetup", event.id, event.urlname);
-        console.log("successful formatMeetupFavorite")
     }
 
 
@@ -295,12 +277,10 @@ $(document).ready(function () {
         var pre = "https://cors-anywhere.herokuapp.com/";
         var meetupKey = "221a475e5932e6c6c497a294d424e30";
         var meetupURL = pre + "api.meetup.com/" + urlName + "/events/" + id + "?key=" + meetupKey + "&photo-host=public";
-        console.log(meetupURL);
         $.ajax({
             url: meetupURL,
             method: "GET"
         }).then(function (res) {
-            console.log(res);
             formatMeetUpFavorite(res);
             checkMeetUpFinished()
         });
@@ -316,8 +296,8 @@ $(document).ready(function () {
 
     $("#submit-Search").on("click", function () {
         event.preventDefault();
-        $("#results-display").empty()
         if (query !== $("#search-Event").val().trim() || zipcode !== $("#search-Number").val().trim() || distance !== $("#search-Location").val().trim()) {
+            $("#results-display").empty()
             query = $("#search-Event").val().trim();
             if (query.includes("#")) {
                 // here is where we need a function asking people to not use # character
@@ -331,8 +311,8 @@ $(document).ready(function () {
 
             }
             distance = $("#search-Location").val().trim();
-            if (parseInt(distance) === NaN) {
-                // here is where we need a function for not a valid distance
+            if (parseInt(distance) === NaN && parseInt(distance) <= 100) {
+                // here is where we need a function for not a valid distance, or needs to be less than 100.
                 return;
             }
             events = []
@@ -340,7 +320,6 @@ $(document).ready(function () {
             $("#results-display").append(spinner);
             getEventBrite();
             getMeetUp();
-            console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
         }
     });
 
@@ -349,8 +328,10 @@ $(document).ready(function () {
         if (readyCheck === 2) {
             sortEvents()
             readyCheck = 0;
-            var header = $("<h3>").addClass("header-small rounded").text("Top Events:");
-            $("#results-display").prepend(header);
+            if (document.URL.includes("index2")) {
+                var header = $("<h3>").addClass("header-small rounded").text("Top Events:");
+                $("#results-display").prepend(header);
+            }
             $(".fa-spinner").remove();
         }
     }
