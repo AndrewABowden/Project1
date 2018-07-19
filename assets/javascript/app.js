@@ -316,8 +316,8 @@ $(document).ready(function () {
 
     $("#submit-Search").on("click", function () {
         event.preventDefault();
-        $("#results-display").empty()
         if (query !== $("#search-Event").val().trim() || zipcode !== $("#search-Number").val().trim() || distance !== $("#search-Location").val().trim()) {
+            $("#results-display").empty()
             query = $("#search-Event").val().trim();
             if (query.includes("#")) {
                 // here is where we need a function asking people to not use # character
@@ -349,8 +349,10 @@ $(document).ready(function () {
         if (readyCheck === 2) {
             sortEvents()
             readyCheck = 0;
-            var header = $("<h3>").addClass("header-small rounded").text("Top Events:");
-            $("#results-display").prepend(header);
+            if (document.URL.includes("index2")) {
+                var header = $("<h3>").addClass("header-small rounded").text("Top Events:");
+                $("#results-display").prepend(header);
+            }
             $(".fa-spinner").remove();
         }
     }
