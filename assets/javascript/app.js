@@ -43,7 +43,7 @@ $(document).ready(function () {
                         .then(function () {
                             /* Insert HTML formatting for MeetUp Favorites here */
                             if (document.URL.includes("favorites")) {
-                                if (currentUser.muFavorites.length>0) {
+                                if (currentUser.muFavorites.length > 0) {
                                     console.log(currentUser.muFavorites)
                                     currentUser.muFavorites.forEach(function (e) {
                                         returnMeetupFav(e.id, e.URL)
@@ -97,10 +97,9 @@ $(document).ready(function () {
             database.ref("/users/" + uID + "/MUFavs").once("value")
                 .then(function (snap) {
                     var some = snap.val()
-                    console.log(Object.values(some))
                     if (some !== null) {
                         Object.values(some).forEach(function (childSnapshot, i) {
-                            var childKey = childSnapshot.eID;
+                        var childKey = childSnapshot.eID;
                             var childVal = childSnapshot.eURL;
                             var muObj = { id: childKey, URL: childVal }
                             muFavs.push(muObj);
@@ -191,7 +190,7 @@ $(document).ready(function () {
         $("#results-display").empty()
         events.forEach(function (e) {
             // creating a div to rule them all
-            var containingDiv = $("<div>").addClass("apielements")
+            var containingDiv = $("<div>").addClass("apielements rounded")
             // creating the title of the gathering
             var title = $("<h2>").text(e.name)
             // showing the date
@@ -238,11 +237,11 @@ $(document).ready(function () {
             $(this).attr("data-state", "not");
             if ($(this).attr("data-src") === "eventBrite") {
                 //remove from eventBrite faves
-                remEBFav(currentUser, $(this).attr("data-id"))
+                remEBFav(currentUser.userID, $(this).attr("data-id"))
             }
             else if ($(this).attr("data-src") === "meetup") {
                 // remove from meetup faves
-                remMUFav(currentUser, $(this).attr("data-id"))
+                remMUFav(currentUser.userID, $(this).attr("data-id"))
             }
         }
     })
@@ -304,8 +303,8 @@ $(document).ready(function () {
 
     $("#submit-Search").on("click", function () {
         event.preventDefault();
-        $("#results-display").empty()
-        if (query !== $("#search-Event").val().trim() || zipcode !== $("#search-Number").val().trim() || distance !== $("#search-Location").val().trim()) {
+        if ((query !== $("#search-Event").val().trim() || zipcode !== $("#search-Number").val().trim() || distance !== $("#search-Location").val().trim())) {
+            $("#results-display").empty()
             query = $("#search-Event").val().trim();
             if (query.includes("#")) {
                 // here is where we need a function asking people to not use # character
@@ -326,7 +325,6 @@ $(document).ready(function () {
             events = []
             getEventBrite();
             getMeetUp();
-            console.log("Query: " + query + "Zip: " + zipcode + "Distance: " + distance);
         }
     });
 
