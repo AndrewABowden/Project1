@@ -313,22 +313,17 @@ $(document).ready(function () {
                 return;
             }
             distance = $("#search-Location").val().trim();
-<<<<<<< HEAD
-            if (parseInt(distance) === NaN || parseInt(distance) >= 100) {
-                // here is where we need a function for not a valid distance, or needs to be less than 100.
-=======
             if (parseInt(distance) === NaN || parseInt(distance) > 100) {
                 $('#modal-invalid-distance').modal({
                     show: true
                 })
->>>>>>> ca0396915f73c98929dc617a9441843e3362385a
                 return;
             }
             events = []
             var spinner = $("<i>").addClass("fas fa-spinner fa-spin fa-4x");
             $("#results-display").append(spinner);
             getEventBrite();
-            getMeetUp();
+            getMeetUp();    
         }
     });
 
