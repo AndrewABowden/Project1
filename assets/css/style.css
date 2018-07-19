@@ -10,6 +10,7 @@ body {
 body > .container {
     margin-bottom: 80px;
 }
+
 /* style for api elements */
 .api-Elements {
     color: black;
@@ -84,14 +85,6 @@ a:hover {
 a:active {
     color: whitesmoke;
 }
-
-/* API Content Container */
-/* #apiContainer {
-    border: 2px solid black;
-    border-radius: 4px;
-    box-shadow: 5px 5px 5px rgba(18, 0, 41, 0.5);
-    transition: box-shadow 1s;
-    animation: bounceIn 2s; */
       
 .header {
     align-content: center;

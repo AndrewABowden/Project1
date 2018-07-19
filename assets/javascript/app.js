@@ -316,7 +316,7 @@ $(document).ready(function () {
 
     $("#submit-Search").on("click", function () {
         event.preventDefault();
-        if ((query !== $("#search-Event").val().trim() || zipcode !== $("#search-Number").val().trim() || distance !== $("#search-Location").val().trim())) {
+        if (query !== $("#search-Event").val().trim() || zipcode !== $("#search-Number").val().trim() || distance !== $("#search-Location").val().trim()) {
             $("#results-display").empty()
             query = $("#search-Event").val().trim();
             if (query.includes("#")) {
@@ -348,8 +348,10 @@ $(document).ready(function () {
         if (readyCheck === 2) {
             sortEvents()
             readyCheck = 0;
-            var header = $("<h3>").addClass("header-small rounded").text("Top Events:");
-            $("#results-display").prepend(header);
+            if (document.URL.includes("index2")) {
+                var header = $("<h3>").addClass("header-small rounded").text("Top Events:");
+                $("#results-display").prepend(header);
+            }
             $(".fa-spinner").remove();
         }
     }
