@@ -22,6 +22,11 @@ $(document).ready(function () {
                     currentUser.userZip = snapshot.val().userZip;
                     /* Insert HTML Formatting here for user information. */
 
+                    // Populated zipcode with user zipcode
+                    if (document.URL.includes("index2")) {
+                        $("#search-Number").val(currentUser.userZip);
+                    }
+                    
                     /* end of Insert HTML formatting */
                     loadEBFavorites(currentUser.userID)
                         .then(function () {
