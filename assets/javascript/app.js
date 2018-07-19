@@ -299,20 +299,29 @@ $(document).ready(function () {
         if (query !== $("#search-Event").val().trim() || zipcode !== $("#search-Number").val().trim() || distance !== $("#search-Location").val().trim()) {
             $("#results-display").empty()
             query = $("#search-Event").val().trim();
-            if (query.includes("#")) {
-                // here is where we need a function asking people to not use # character
+            if (query.includes("#") || query ==="") {
+                $('#modal-wrong-query').modal({
+                    show: true
+                })
                 return;
             }
             zipcode = $("#search-Number").val().trim();
             if (parseInt(zipcode) === NaN || (parseInt(zipcode) <= 501 && parseInt(zipcode) >= 99950)) {
-                // here is where we need a function for not valid zipcode
+                $('#modal-zipcode-invalid').modal({
+                    show: true
+                })
                 return;
-                // 
-
             }
             distance = $("#search-Location").val().trim();
+<<<<<<< HEAD
             if (parseInt(distance) === NaN || parseInt(distance) >= 100) {
                 // here is where we need a function for not a valid distance, or needs to be less than 100.
+=======
+            if (parseInt(distance) === NaN || parseInt(distance) > 100) {
+                $('#modal-invalid-distance').modal({
+                    show: true
+                })
+>>>>>>> ca0396915f73c98929dc617a9441843e3362385a
                 return;
             }
             events = []
