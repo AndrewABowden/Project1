@@ -148,7 +148,7 @@ $(document).ready(function () {
             url: eventBriteURL,
             method: "GET"
         }).then(function (res) {
-            console.log(res)
+            // console.log(res)
             res.events.forEach(element => {
                 formatEventBriteData(element)
             });
@@ -261,7 +261,6 @@ $(document).ready(function () {
             url: meetupURL,
             method: "GET"
         }).then(function (res) {
-            console.log(res);
             res.forEach(element => {
                 formatMeetUp(element);
             });
