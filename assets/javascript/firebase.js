@@ -15,10 +15,8 @@ var config = {
   // User signout
   function logOut() {
     auth.signOut().then(function () {
-      console.log("user signed out");
       // Sign-out successful.
     }).catch(function (error) {
-      console.log(error.code);
     });
   }
   
