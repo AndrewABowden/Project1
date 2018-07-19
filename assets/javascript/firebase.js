@@ -57,13 +57,21 @@ var config = {
   
   
   
-    // Takes in a user id and event it and removes the favorite. Return true on success, false on failure
-    function remMUFav(uID, eID) {
-  
-    };
-  
-    // Takes in a user id and event it and removes the favorite. Return true on success, false on failure
-    function remEBFav(uID, eID) {
-  
-    };
+// Takes in a user id and event it and removes the favorite. Return true on success, false on failure
+function remMUFav(uID, eID) {
+  database.ref("/users/" + uID + "/MUFavs").once('value', function (snapshot) {
+    if (snapshot.hasChild(eID)) { 
+      database.ref("/users/" + uID + "/MUFavs/"+eID).remove();
+    }
+  })
+};
+
+// Takes in a user id and event it and removes the favorite. Returntrue on success, false on failure
+function remEBFav(uID, eID) {
+  database.ref("/users/" + uID + "/EBFavs").once('value', function (snapshot) {
+    if (snapshot.hasChild(eID)) {
+      database.ref("/users/" + uID + "/EBFavs/"+eID).remove();
+    }
+  })
+};
   
