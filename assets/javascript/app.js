@@ -204,7 +204,7 @@ $(document).ready(function () {
                 // giving a link to 
                 var link = $("<a>").text(e.link).attr("href", e.link)
                 // creating favorite button needs a font awesome icon
-                var favBtn = $("<i>").addClass("fav-btn far fa-heart").attr("data-not-favorite", 'fav-btn far fa-heart').attr("data-favorite", "fav-btn fas fa-heart").attr("data-state", "not").attr("data-src", e.src).attr("data-id", e.id).attr("data-url-name", e.urlName)
+                var favBtn = $("<i>").addClass("fav-btn far fa-heart fa-2x").attr("data-not-favorite", 'fav-btn far fa-heart fa-2x').attr("data-favorite", "fav-btn fas fa-heart fa-2x").attr("data-state", "not").attr("data-src", e.src).attr("data-id", e.id).attr("data-url-name", e.urlName)
                 // appending it all to the ruler
                 containingDiv.append(title, date, sum, link, favBtn)
                 if (e.src === "eventBrite") {

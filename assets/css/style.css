@@ -6,26 +6,33 @@ body {
     background-image: url("https://subtlepatterns.com/patterns/contemporary_china.png");
     font-family: 'Lustria', serif;
   }
+
+body > .container {
+    margin-bottom: 80px;
+}
 /* style for api elements */
 .api-Elements {
     color: black;
-
     padding: 7px;
     margin: 1px;
     margin-bottom: 10px;
     box-shadow: 0px 0px 0px .2px darkblue;
     background-color: white;
+    position: relative;
 
 }
 /*footer*/
-/* .footer {
-
-                background-color: black;
-                color: white;
-                text-align: center;
-                margin-top: 20px;
-                padding: 30px;
-} */
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 70px;
+    width: 100%;
+    padding: 20px;
+    background-color: #060925;
+    color: white;
+    text-align: center;
+}
 
 /*Nav Menu title */
   .navbar-brand {
@@ -36,7 +43,7 @@ body {
 /*Nav Menu */
   .nav {
     width: 100%;
-    background-color: #04061f;
+    background-color: #060925;
   
     
 
@@ -166,4 +173,12 @@ a active {
 
 #my-form {
     padding: 6px;
+}
+
+/* Styling for favorite heart  */
+.fa-heart {
+   position: absolute;
+   top: 10px;
+   right: 10px;
+   color: #57CC14;
 }
