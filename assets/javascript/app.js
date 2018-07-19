@@ -43,7 +43,7 @@ $(document).ready(function () {
                         .then(function () {
                             /* Insert HTML formatting for MeetUp Favorites here */
                             if (document.URL.includes("favorites")) {
-                                if (currentUser.muFavorites.length > 0){
+                                if (currentUser.muFavorites.length>0) {
                                     console.log(currentUser.muFavorites)
                                     currentUser.muFavorites.forEach(function (e) {
                                         returnMeetupFav(e.id, e.URL)
