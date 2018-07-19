@@ -179,7 +179,7 @@ $(document).ready(function () {
 
     function populateEvents() {
         $("#results-display").empty()
-        if (events.length === 0) {
+        if (events.length === 0 && document.URL.includes("index2")) {
             var containingDiv = $("<div>").addClass("api-Elements")
             var noResults = $("<p>").addClass("text-center").text("There are no results that meet your search parameters. Try increasing your search distance.");
             $(containingDiv).append(noResults);
