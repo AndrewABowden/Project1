@@ -109,7 +109,6 @@ $(document).ready(function () {
         })
     };
 
-    var eventBriteIds = [];
     var events = [];
     // this var is for testing to see if we got both our ajax calls back.
     var readyCheck = 0;
@@ -179,7 +178,7 @@ $(document).ready(function () {
 
     function populateEvents() {
         $("#results-display").empty()
-        if (events.length === 0) {
+        if (events.length === 0 && document.URL.includes("index2")) {
             var containingDiv = $("<div>").addClass("api-Elements")
             var noResults = $("<p>").addClass("text-center").text("There are no results that meet your search parameters. Try increasing your search distance.");
             $(containingDiv).append(noResults);
@@ -195,7 +194,7 @@ $(document).ready(function () {
                 // showing the summary
                 var sum = $("<p>").text(e.info)
                 // giving a link to 
-                var link = $("<a>").text(e.link).attr("href", e.link)
+                var link = $("<a>").text(e.link).addClass("event-link").attr("target", "_blank").attr("href", e.link)
                 // creating favorite button needs a font awesome icon
                 var favBtn = $("<i>").addClass("fav-btn far fa-heart fa-2x").attr("data-not-favorite", 'fav-btn far fa-heart fa-2x').attr("data-favorite", "fav-btn fas fa-heart fa-2x").attr("data-state", "not").attr("data-src", e.src).attr("data-id", e.id).attr("data-url-name", e.urlName)
                 // appending it all to the ruler
@@ -323,7 +322,7 @@ $(document).ready(function () {
             var spinner = $("<i>").addClass("fas fa-spinner fa-spin fa-4x");
             $("#results-display").append(spinner);
             getEventBrite();
-            getMeetUp();
+            getMeetUp();    
         }
     });
 
