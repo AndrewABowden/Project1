@@ -22,6 +22,10 @@ body > .container {
     position: relative;
 
 }
+.custom-toggler.navbar-toggler{
+    color:green;
+    background: white;
+}
 
 /*footer*/
 .footer {
